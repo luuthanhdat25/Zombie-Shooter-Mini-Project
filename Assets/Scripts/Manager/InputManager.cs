@@ -1,6 +1,7 @@
 using UnityEngine;
 using RepeatUtil.DesignPattern.SingletonPattern;
 using System;
+using UnityEngine.InputSystem;
 
 namespace Manager
 {
@@ -28,5 +29,11 @@ namespace Manager
         }
 
         public bool IsShootPressed() => inputSystemSetting.Player.Shoot.IsPressed();
+
+        /// <summary>
+        /// The current Pointer coordinates in window space
+        /// </summary>
+        /// <returns>Vector 2 of Position</returns>
+        public Vector2 GetMousePositionInScreen() => Mouse.current.position.ReadValue();
     }
 }
