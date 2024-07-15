@@ -4,13 +4,10 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerController : Singleton<PlayerController>
+    public class PlayerController : MonoBehaviour
     {
         [SerializeField]
         private PlayerMovement playerMovement;
-
-        [SerializeField]
-        private PlayerRotation playerRotation;
 
         [SerializeField]
         private PlayerShoot playerShoot;
@@ -25,13 +22,13 @@ namespace Player
             if (InputManager.Instance.IsShootPressed())
             {
                 Vector3 shootDireciton = GetRotateDirectionFromMouse();
-                playerRotation.Rotate(shootDireciton);
-                playerShoot.Fire(shootDireciton);
+                playerMovement.Rotate(shootDireciton);
+                playerShoot.Shoot(shootDireciton);
             }
             else
             {
-                playerShoot.Fire(Vector3.zero);
-                playerRotation.Rotate(moveDirection);
+                playerShoot.Shoot(Vector3.zero);
+                playerMovement.Rotate(moveDirection);
             }
         }
 

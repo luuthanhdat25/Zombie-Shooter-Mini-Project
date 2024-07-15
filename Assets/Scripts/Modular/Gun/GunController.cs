@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GunController : MonoBehaviour
@@ -7,5 +5,5 @@ public class GunController : MonoBehaviour
     [SerializeField]
     private Transform shootingPoint;
 
-
+    public Vector3 ShootingPoition() => shootingPoint.position;
 }

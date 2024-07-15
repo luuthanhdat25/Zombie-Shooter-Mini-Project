@@ -1,16 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileStraightMove : MonoBehaviour
+namespace Projectile
 {
-    [SerializeField]
-    private Rigidbody rigidbody;
-
-    void Start()
+    [RequireComponent (typeof(Rigidbody))]
+    public class ProjectileStraightMove : AbstractProjectileMovement
     {
-        rigidbody.velocity = Vector3.forward * 10;
-    }
+        [SerializeField]
+        private Rigidbody rigidbody;
 
-    
+        protected override void LoadComponents()
+        {
+            base.LoadComponents();
+            if (rigidbody != null) return;
+            rigidbody = GetComponent<Rigidbody>();
+        }
+
+        public override void Move(Vector3 directionMove, float speed)
+        {
+            rigidbody.velocity = directionMove.normalized * speed;
+        }
+    }
 }

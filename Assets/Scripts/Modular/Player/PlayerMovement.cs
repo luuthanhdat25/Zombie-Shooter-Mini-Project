@@ -6,7 +6,7 @@ namespace Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour
     {
-        [Header("Player")]
+        [Header("Movement")]
         [Range(0.5f,10)]
         [SerializeField]
         private float moveSpeed;
@@ -16,6 +16,13 @@ namespace Player
         [SerializeField]
         private float speedChangeRate = 10.0f;
 
+        [Header("Rotation")]
+        [Range(0.0f, 0.3f)]
+        [SerializeField]
+        private float rotationSmoothTime = 0.12f;
+
+        private float rotationVelocity;
+        private float targetRotation;
         private float currentSpeed;
         private CharacterController charactorController;
 
@@ -53,6 +60,19 @@ namespace Player
             }
 
             charactorController.Move(moveDirection * (currentSpeed * Time.deltaTime));
+        }
+
+        
+        public void Rotate(Vector3 rotateDirection)
+        {
+            if (rotateDirection != Vector3.zero)
+            {
+                targetRotation = Mathf.Atan2(rotateDirection.x, rotateDirection.z) * Mathf.Rad2Deg;
+                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref rotationVelocity,
+                    rotationSmoothTime);
+
+                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            }
         }
     }
 }

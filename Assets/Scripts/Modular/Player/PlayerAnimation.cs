@@ -12,12 +12,14 @@ namespace Player
             Shoot
         }
 
+        [SerializeField]
+        private PlayerMovement playerMovement;
+
         private int animIDSpeed;
         private int animIDShoot;
 
         private Animator animator;
         private float animationBlend;
-        private PlayerMovement playerMovement;
 
         private bool isShootOn = false;
 
@@ -31,11 +33,6 @@ namespace Player
         {
             animIDSpeed = Animator.StringToHash(AnimatorParameter.Speed.ToString());
             animIDShoot = Animator.StringToHash(AnimatorParameter.Shoot.ToString());
-        }
-
-        private void Start()
-        {
-            playerMovement = PlayerController.Instance.PlayerMovement;
         }
 
         private void LateUpdate()
