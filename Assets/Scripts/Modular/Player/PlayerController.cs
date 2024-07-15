@@ -12,29 +12,51 @@ namespace Player
         [SerializeField]
         private PlayerRotation playerRotation;
 
-        private Quaternion isometricQuaternion;
+        [SerializeField]
+        private PlayerShoot playerShoot;
 
         public PlayerMovement PlayerMovement => playerMovement;
 
-        protected override void Awake()
+        private void FixedUpdate()
         {
-            base.Awake();
-            isometricQuaternion = Quaternion.Euler(0, 45, 0);
-        }
-
-        private void Update()
-        {
-            Vector3 moveDirection = GetMoveDirection();
+            Vector3 moveDirection = GetMoveDirectionFromInput();
             playerMovement.Move(moveDirection);
-            playerRotation.Rotate(moveDirection);
+
+            if (InputManager.Instance.IsShootPressed())
+            {
+                Vector3 shootDireciton = GetRotateDirectionFromMouse();
+                playerRotation.Rotate(shootDireciton);
+                playerShoot.Fire(shootDireciton);
+            }
+            else
+            {
+                playerShoot.Fire(Vector3.zero);
+                playerRotation.Rotate(moveDirection);
+            }
         }
 
-        private Vector3 GetMoveDirection()
+        private Vector3 GetMoveDirectionFromInput()
         {
             Vector2 inputMoveVector2 = InputManager.Instance.GetRawInputNormalized();
-            Vector3 moveDirectionNormal = new Vector3(inputMoveVector2.x, 0.0f, inputMoveVector2.y);
-            Vector3 moveDirectionIsometric = isometricQuaternion * moveDirectionNormal;
-            return moveDirectionIsometric;
+            Vector3 moveDirectionVector3 = GetMoveDirectionVector3(inputMoveVector2);
+            return GetIsometricVectorFromNormalVector(moveDirectionVector3);
+        }
+
+        private Vector3 GetMoveDirectionVector3(Vector2 vector2)
+        {
+            return new Vector3(vector2.x, 0.0f, vector2.y);
+        }
+
+        private Vector3 GetIsometricVectorFromNormalVector(Vector3 normal)
+        {
+            return Quaternion.Euler(0, 45, 0) * normal;
+        }
+
+        private Vector3 GetRotateDirectionFromMouse()
+        {
+            Vector2 mouseDirection = CameraManager.Instance.GetNormalizedMouseDirectionToScreenCenter();
+            Vector3 directionVector3 = GetMoveDirectionVector3(mouseDirection);
+            return GetIsometricVectorFromNormalVector(directionVector3);
         }
     }
 }
