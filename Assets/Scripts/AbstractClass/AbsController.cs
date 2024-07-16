@@ -33,6 +33,15 @@ namespace AbstractClass
         protected AbsStat absStat;
         public AbsStat AbsStat => absStat;
 
+        [SerializeField]
+        protected AbsDamageReciver absDamageReciver;
+        public AbsDamageReciver AbsDamageReciver => absDamageReciver;
+
+        [SerializeField]
+        protected AbsDamageSender absDamageSender;
+        public AbsDamageSender AbsDamageSender => absDamageSender;
+
+
         protected override void LoadComponents()
         {
             base.LoadComponents();
@@ -43,6 +52,8 @@ namespace AbstractClass
             LoadComponentInChild<AbsVisionSensor>(ref absVisionSensor, gameObject);
             LoadComponentInChild<AbsHearingSensor>(ref absHearingSensor, gameObject);
             LoadComponentInChild<AbsStat>(ref absStat, gameObject);
+            LoadComponent<AbsDamageSender>(ref absDamageSender, gameObject);
+            LoadComponent<AbsDamageReciver>(ref absDamageReciver, gameObject);
         }
     }
 }

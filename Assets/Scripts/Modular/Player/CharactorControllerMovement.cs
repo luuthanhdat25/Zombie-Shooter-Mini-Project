@@ -15,7 +15,7 @@ namespace Player
         private float speedChangeRate = 10.0f;
 
         [Header("Rotation")]
-        [Range(0.0f, 0.3f)]
+        [Range(0.0f, 3f)]
         [SerializeField]
         private float rotationSmoothTime = 0.12f;
 
@@ -23,7 +23,6 @@ namespace Player
         private float targetRotation;
         private float currentSpeed;
 
-        public override float CurrentSpeed() => currentSpeed;
         public float SpeedChangeRate => speedChangeRate;
 
         public const float SPEED_OFFSET = 0.1F;
@@ -34,7 +33,7 @@ namespace Player
             LoadComponentInParent<CharacterController>(ref charactorController, gameObject);
         }
 
-        public override void Move(Vector3 moveDirection)
+        public override void Move(Vector3 moveDirection, float moveSpeed)
         {
             if (moveDirection == Vector3.zero) currentSpeed = 0.0f;
 

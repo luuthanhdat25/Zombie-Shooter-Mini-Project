@@ -70,17 +70,9 @@ public class GunSelector : RepeatMonoBehaviour
         indexSelectGun++;
         indexSelectGun = indexSelectGun >= gunSOList.Count ? 0 : indexSelectGun;
 
-        ResetShoot();
+        GunSO gunSO = gunSOList[indexSelectGun];
+        shootTypeDictionary[gunSO.ShootType].ResetShootValue(gunSO);
         ActiveVisualGun(indexSelectGun);
-    }
-
-    private void ResetShoot()
-    {
-        //Khong can for chi can dung index
-        foreach (var shootTypePair in shootTypeDictionary)
-        {
-            shootTypePair.Value.ResetShootValue(gunSOList[indexSelectGun]);
-        }
     }
 
     public Vector3 ProjectileSpawnPosition()
@@ -93,6 +85,12 @@ public class GunSelector : RepeatMonoBehaviour
     public void UsingGun(Vector3 shootDirection)
     {
         GunSO currentGun = gunSOList[indexSelectGun];
-        shootTypeDictionary[currentGun.ShootType].Shoot(shootDirection, currentGun);
+        ShootData shootData = new ShootData
+        {
+            InitialDirection = shootDirection,
+            InitialPosition = ProjectileSpawnPosition(),
+            GunSO = currentGun
+        };
+        shootTypeDictionary[currentGun.ShootType].Shoot(shootData);
     }
 }

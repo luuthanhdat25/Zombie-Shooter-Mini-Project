@@ -1,22 +1,20 @@
 using RepeatUtil;
+using System;
 using UnityEngine;
 
 namespace AbstractClass
 {
     public abstract class AbsStat : RepeatMonoBehaviour
     {
+        public Action OnDead;
+
         [SerializeField] 
         protected int hpMax = 5;
 
-        [SerializeField]
-        protected int damageStart = 5;
-        
         protected bool isDead = false;
         protected int hpCurrent;
-        protected int damageCurrent;
 
         public int CurrentHp => this.hpCurrent;
-        public int CurrentDamge => this.damageCurrent;
         public int HpMax => this.hpMax;
 
         private void OnEnable() => Reborn();
@@ -24,7 +22,6 @@ namespace AbstractClass
         public virtual void Reborn()
         {
             this.hpCurrent = this.hpMax;
-            damageCurrent = damageStart;
             this.isDead = false;
         }
 
@@ -50,19 +47,7 @@ namespace AbstractClass
         {
             if (!this.IsDead()) return;
             this.isDead = true;
-            this.OnDead();
-        }
-
-        protected abstract void OnDead();
-
-        public virtual void AddDamage(int amount)
-        {
-            damageCurrent += amount;
-        }
-
-        public virtual void DeductDamage(int amount)
-        {
-            damageCurrent = damageCurrent > amount? damageCurrent - amount: 0;
+            OnDead?.Invoke();
         }
     }
 }

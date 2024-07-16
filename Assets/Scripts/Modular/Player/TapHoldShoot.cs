@@ -5,6 +5,7 @@ using Projectile;
 using ScriptableObjects;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Player
 {
@@ -15,27 +16,29 @@ namespace Player
             firingTimer = 0;
         }
 
-        public override void Shoot(Vector3 direction, GunSO gunSO)
+        public override void Shoot(ShootData shootData)
         {
-            if(direction == Vector3.zero) return;
+            if(shootData.InitialDirection == Vector3.zero) return;
 
             firingTimer += Time.fixedDeltaTime;
 
-            if(firingTimer >= FireRateToTimeDelayShoot(gunSO.FireRate))
+            if(firingTimer >= FireRateToTimeDelayShoot(shootData.GunSO.FireRate))
             {
-                //SpawnProjetile(currentGunSO, direction);
-                Debug.Log("Tap shoot");
+                SpawnProjetile(shootData);
                 firingTimer = 0;
             }
         }
 
-        private void SpawnProjetile(GunSO gunSo, Vector3 direction)
+        private void SpawnProjetile(ShootData shootData)
         {
-            //Debug.Log("Shoot: " + gunSo.Prefab.name);
-            //GameObject currentGun = gunObjectList[indexSelectGun];
-            //Vector3 shootingPosition = currentGun.GetComponent<GunController>().ShootingPoition();
-            //AbstractProjectileMovement projectile = Instantiate(gunSo.ProjectileSO.Prefab, shootingPosition, Quaternion.identity).GetComponent<AbstractProjectileMovement>();
-            //projectile.Move(direction, currentGunSO.ProjectileSO.SpeedMove);
+            Debug.Log("Shoot: " + shootData.GunSO.Prefab.name);
+            GameObject newProjectile = Instantiate(shootData.GunSO.ProjectileSO.Prefab, shootData.InitialPosition, Quaternion.identity);
+            AbsController absController = newProjectile.GetComponent<AbsController>();
+            if(absController == null)
+            {
+                Debug.LogError(shootData.GunSO.Prefab.name + " doesn't have controller!");
+            }
+            absController.AbsMovement.Move(shootData.InitialDirection, shootData.GunSO.ProjectileSO.SpeedMove);
         }
     }
 }

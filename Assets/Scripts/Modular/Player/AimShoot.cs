@@ -16,9 +16,9 @@ public class AimShoot : AbsShoot
         aimTimer = 0;
     }
 
-    public override void Shoot(Vector3 direction, GunSO gunSO)
+    public override void Shoot(ShootData shootData)
     {
-        if (direction == Vector3.zero)
+        if (shootData.InitialDirection == Vector3.zero)
         {
             aimTimer = 0;
             return;
@@ -27,11 +27,11 @@ public class AimShoot : AbsShoot
         firingTimer += Time.fixedDeltaTime;
         aimTimer += Time.fixedDeltaTime;
 
-        if (firingTimer >= FireRateToTimeDelayShoot(gunSO.FireRate))
+        if (firingTimer >= FireRateToTimeDelayShoot(shootData.GunSO.FireRate))
         {
-            if (aimTimer >= gunSO.AimDuration)
+            if (aimTimer >= shootData.GunSO.AimDuration)
             {
-                //SpawnProjetile(currentGunSO);
+                SpawnProjetile(shootData);
                 Debug.Log("Aim shoot");
                 firingTimer = 0;
                 aimTimer = 0;
@@ -39,7 +39,7 @@ public class AimShoot : AbsShoot
         }
     }
 
-    private void SpawnProjetile(GunSO gunSo, Vector3 direction)
+    private void SpawnProjetile(ShootData shootData)
     {
         //Debug.Log("Shoot: " + gunSo.Prefab.name);
         //GameObject currentGun = gunObjectList[indexSelectGun];

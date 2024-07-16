@@ -5,6 +5,8 @@ namespace Enum
         Default,
         Player,
         Gun,
-        Enemy
+        Enemy,
+        PlayerBullet,
+        EnemyBullet
     }
 }

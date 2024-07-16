@@ -1,10 +1,11 @@
+using AbstractClass;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Projectile
 {
-    public class ProjectileController : MonoBehaviour
+    public class ProjectileController : AbsController
     {
-            
     }
 }
 
