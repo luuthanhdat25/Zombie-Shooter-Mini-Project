@@ -21,6 +21,9 @@ namespace ScriptableObjects
         [Range(1, 1000)]
         public int Damage;
 
+        [Range(1, 1000)]
+        public int MaxProjectile;
+
         [Range(0.1f, 50f)]
         public float ReloadDuration;
 

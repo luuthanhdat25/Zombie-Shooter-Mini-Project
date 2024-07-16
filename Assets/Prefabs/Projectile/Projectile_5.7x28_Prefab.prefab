@@ -178,7 +178,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpMax: 5
-  damageStart: 5
 --- !u!1 &3728713324299997043
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,6 +327,8 @@ GameObject:
   - component: {fileID: 8832424271824836176}
   - component: {fileID: 6756006409590550447}
   - component: {fileID: 4431978495507322819}
+  - component: {fileID: 4913159556901915542}
+  - component: {fileID: 6121124234016971830}
   m_Layer: 0
   m_Name: Projectile_5.7x28_Prefab
   m_TagString: Untagged
@@ -426,7 +427,8 @@ MonoBehaviour:
   absVisionSensor: {fileID: 5559164254253385719}
   absHearingSensor: {fileID: 637792155970888419}
   absStat: {fileID: 7597395069134659611}
-  projectileSO: {fileID: 11400000, guid: e2ac813ef560f2c48810120b94895d10, type: 2}
+  absDamageReciver: {fileID: 4913159556901915542}
+  absDamageSender: {fileID: 6121124234016971830}
 --- !u!65 &8832424271824836176
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -588,3 +590,29 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &4913159556901915542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517766854666655396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5abb35bb8a38c7d42bc5cf33993051a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  absController: {fileID: 6027704544757906619}
+--- !u!114 &6121124234016971830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517766854666655396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2069f046134afb444bed4fe3c0f854e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5

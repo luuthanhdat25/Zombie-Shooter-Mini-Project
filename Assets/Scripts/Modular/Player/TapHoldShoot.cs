@@ -16,10 +16,8 @@ namespace Player
             firingTimer = 0;
         }
 
-        public override void Shoot(ShootData shootData)
+        public override void ShootHold(ShootData shootData)
         {
-            if(shootData.InitialDirection == Vector3.zero) return;
-
             firingTimer += Time.fixedDeltaTime;
 
             if(firingTimer >= FireRateToTimeDelayShoot(shootData.GunSO.FireRate))
@@ -28,6 +26,9 @@ namespace Player
                 firingTimer = 0;
             }
         }
+
+        public override void ShootRelease(ShootData shootData)
+        {}
 
         private void SpawnProjetile(ShootData shootData)
         {

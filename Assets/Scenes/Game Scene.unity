@@ -410,6 +410,7 @@ Transform:
   m_Children:
   - {fileID: 284642638}
   - {fileID: 959012273}
+  - {fileID: 1058111752}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &530870745
@@ -751,6 +752,64 @@ MonoBehaviour:
   charactorController: {fileID: 4416926083347132233}
   speedChangeRate: 10
   rotationSmoothTime: 0.1
+--- !u!1 &1058111751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1058111752}
+  - component: {fileID: 1058111753}
+  m_Layer: 0
+  m_Name: CursorManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1058111752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058111751}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 504606794}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1058111753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058111751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b240481f1e96ef248b76b6fee0c20123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorAnimationList:
+  - ShootType: 1
+    Offset: {x: 64, y: 64}
+    TextureArray:
+    - {fileID: 2800000, guid: 223aab6181af17342a9da41cf3a3beae, type: 3}
+    - {fileID: 2800000, guid: d8bb646a20a6922428bb5f37b2f8b423, type: 3}
+    - {fileID: 2800000, guid: 08568226a385e4748905c8f05a140e0f, type: 3}
+    - {fileID: 2800000, guid: 1265e868882ed5544accb17fd8613a47, type: 3}
+  - ShootType: 0
+    Offset: {x: 64, y: 64}
+    TextureArray:
+    - {fileID: 2800000, guid: f7fb21a078465b54bb6a2ac5a57a569c, type: 3}
+  playerGunSelector: {fileID: 6982812147933622154}
+  playerAimShoot: {fileID: 6982812147933622155}
 --- !u!1 &1126254640
 GameObject:
   m_ObjectHideFlags: 0

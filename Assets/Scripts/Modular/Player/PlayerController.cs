@@ -35,7 +35,7 @@ namespace Player
             }
             else
             {
-                gunSelector.UsingGun(Vector3.zero);
+                gunSelector.UnUsingGun(Vector3.zero);
                 absMovement.Rotate(moveDirection);
             }
         }

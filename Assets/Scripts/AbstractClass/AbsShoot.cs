@@ -8,7 +8,9 @@ namespace AbstractClass
     {
         protected float firingTimer;
 
-        public abstract void Shoot(ShootData shootData);
+        public abstract void ShootHold(ShootData shootData);
+
+        public abstract void ShootRelease(ShootData shootData);
         
         public abstract void ResetShootValue(GunSO newGunSO);
 

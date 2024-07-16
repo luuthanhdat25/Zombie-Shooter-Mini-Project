@@ -6,10 +6,17 @@ using RepeatUtil;
 using ScriptableObjects;
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GunSelector : RepeatMonoBehaviour
 {
+    public EventHandler<OnSwitchGunEventArgs> OnSwitchGun;
+    public class OnSwitchGunEventArgs : EventArgs
+    {
+        public GunSO GunSO;
+    }
+
     [SerializeField]
     private List<GunSO> gunSOList;
 
@@ -19,13 +26,15 @@ public class GunSelector : RepeatMonoBehaviour
     [SerializeField]
     private bool holdGunOnStart;
 
-    private List<GameObject> gunObjectList;
+    private List<GunController> gunControllerList;
     private int indexSelectGun;
     private Dictionary<ShootType, AbsShoot> shootTypeDictionary;
 
     protected override void Awake()
     {
         base.Awake();
+        if (gunSOList.Count == 0) Debug.LogError("Player doen't have any Gun!");
+        
         TapHoldShoot tapHoldShoot = GetComponent<TapHoldShoot> ();
         AimShoot aimShoot = GetComponent<AimShoot>();
         if(tapHoldShoot == null || aimShoot == null)
@@ -41,27 +50,29 @@ public class GunSelector : RepeatMonoBehaviour
 
     private void Start()
     {
-        if (gunSOList.Count == 0)
-        {
-            Debug.LogError("Player doen't have any Gun!");
-        }
-
-        gunObjectList = new();
+        gunControllerList = new();
         foreach (var gunSO in gunSOList)
         {
             GameObject gun = Instantiate(gunSO.Prefab, gunHoldTransform.position, Quaternion.identity);
             gun.transform.parent = gunHoldTransform;
-            gunObjectList.Add(gun);
+            GunController gunController = gun.GetComponent<GunController>();
+            gunControllerList.Add(gunController);
         }
 
-        if (holdGunOnStart) ActiveVisualGun(indexSelectGun);
+        if (holdGunOnStart) ActiveGun(0);
     }
 
-    private void ActiveVisualGun(int indexSelectGun)
+    private void ActiveGun(int indexSelectGun)
     {
         if (indexSelectGun < 0 || indexSelectGun >= gunSOList.Count) return;
-        gunObjectList.ForEach(gun => gun.SetActive(false));
-        gunObjectList[indexSelectGun].SetActive(true);
+        gunControllerList.ForEach(gunController => gunController.gameObject.SetActive(false));
+        gunControllerList[indexSelectGun].gameObject.SetActive(true);
+        
+        shootTypeDictionary[gunSOList[indexSelectGun].ShootType].ResetShootValue(gunSOList[indexSelectGun]);
+        OnSwitchGun?.Invoke(this, new OnSwitchGunEventArgs
+        {
+            GunSO = gunSOList[indexSelectGun]
+        });
     }
 
     public void SwitchGunNext()
@@ -69,28 +80,30 @@ public class GunSelector : RepeatMonoBehaviour
         if (gunSOList.Count <= 1) return;
         indexSelectGun++;
         indexSelectGun = indexSelectGun >= gunSOList.Count ? 0 : indexSelectGun;
-
-        GunSO gunSO = gunSOList[indexSelectGun];
-        shootTypeDictionary[gunSO.ShootType].ResetShootValue(gunSO);
-        ActiveVisualGun(indexSelectGun);
-    }
-
-    public Vector3 ProjectileSpawnPosition()
-    {
-        GameObject currentGun = gunObjectList[indexSelectGun];
-        Vector3 shootingPosition = currentGun.GetComponent<GunController>().ShootingPoition();
-        return shootingPosition;
+        
+        ActiveGun(indexSelectGun);
     }
 
     public void UsingGun(Vector3 shootDirection)
+    {
+        ShootData shootData = new ShootData
+        {
+            InitialDirection = shootDirection,
+            InitialPosition = gunControllerList[indexSelectGun].ShootingPoition(),
+            GunSO = gunSOList[indexSelectGun]
+        };
+        shootTypeDictionary[gunSOList[indexSelectGun].ShootType].ShootHold(shootData);
+    }
+
+    public void UnUsingGun(Vector3 shootDirection)
     {
         GunSO currentGun = gunSOList[indexSelectGun];
         ShootData shootData = new ShootData
         {
             InitialDirection = shootDirection,
-            InitialPosition = ProjectileSpawnPosition(),
+            InitialPosition = gunControllerList[indexSelectGun].ShootingPoition(),
             GunSO = currentGun
         };
-        shootTypeDictionary[currentGun.ShootType].Shoot(shootData);
+        shootTypeDictionary[gunSOList[indexSelectGun].ShootType].ShootRelease(shootData);
     }
 }
