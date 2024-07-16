@@ -13,7 +13,7 @@ namespace Player
         }
 
         [SerializeField]
-        private PlayerMovement playerMovement;
+        private KeyBoardMouseMovement playerMovement;
 
         private int animIDSpeed;
         private int animIDShoot;

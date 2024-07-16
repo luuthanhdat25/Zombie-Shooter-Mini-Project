@@ -1,19 +1,17 @@
-﻿using Manager;
+﻿using AbstractClass;
+using Manager;
 using UnityEngine;
 
 namespace Player
 {
-    [RequireComponent(typeof(CharacterController))]
-    public class PlayerMovement : MonoBehaviour
+    public class KeyBoardMouseMovement : AbsMovement
     {
-        [Header("Movement")]
-        [Range(0.5f,10)]
         [SerializeField]
-        private float moveSpeed;
-
+        private CharacterController charactorController;
         
         [Tooltip("Acceleration and deceleration")]
         [SerializeField]
+        [Range(0.5f, 100f)]
         private float speedChangeRate = 10.0f;
 
         [Header("Rotation")]
@@ -24,19 +22,61 @@ namespace Player
         private float rotationVelocity;
         private float targetRotation;
         private float currentSpeed;
-        private CharacterController charactorController;
 
         public float CurrentSpeed => currentSpeed;
         public float SpeedChangeRate => speedChangeRate;
 
         public const float SPEED_OFFSET = 0.1F;
 
-        private void Awake()
+        protected override void LoadComponents()
         {
-            charactorController = GetComponent<CharacterController>();
+            base.LoadComponents();
+            LoadComponentInParent<CharacterController>(ref charactorController, gameObject);
         }
 
-        public void Move(Vector3 moveDirection)
+        private void FixedUpdate()
+        {
+            Vector3 moveDirection = GetMoveDirectionFromInput();
+            Move(moveDirection);
+
+            if (InputManager.Instance.IsShootPressed())
+            {
+                Vector3 shootDireciton = GetRotateDirectionFromMouse();
+                Rotate(shootDireciton);
+                //playerShootShoot(shootDireciton);
+            }
+            else
+            {
+                //playerShoot.Shoot(Vector3.zero);
+                Rotate(moveDirection);
+            }
+        }
+
+        private Vector3 GetMoveDirectionFromInput()
+        {
+            Vector2 inputMoveVector2 = InputManager.Instance.GetRawInputNormalized();
+            Vector3 moveDirectionVector3 = GetMoveDirectionVector3(inputMoveVector2);
+            return GetIsometricVectorFromNormalVector(moveDirectionVector3);
+        }
+
+        private Vector3 GetMoveDirectionVector3(Vector2 vector2)
+        {
+            return new Vector3(vector2.x, 0.0f, vector2.y);
+        }
+
+        private Vector3 GetIsometricVectorFromNormalVector(Vector3 normal)
+        {
+            return Quaternion.Euler(0, 45, 0) * normal;
+        }
+
+        private Vector3 GetRotateDirectionFromMouse()
+        {
+            Vector2 mouseDirection = CameraManager.Instance.GetNormalizedMouseDirectionToScreenCenter();
+            Vector3 directionVector3 = GetMoveDirectionVector3(mouseDirection);
+            return GetIsometricVectorFromNormalVector(directionVector3);
+        }
+
+        protected override void Move(Vector3 moveDirection)
         {
             if (moveDirection == Vector3.zero) currentSpeed = 0.0f;
 
@@ -62,8 +102,7 @@ namespace Player
             charactorController.Move(moveDirection * (currentSpeed * Time.deltaTime));
         }
 
-        
-        public void Rotate(Vector3 rotateDirection)
+        protected override void Rotate(Vector3 rotateDirection)
         {
             if (rotateDirection != Vector3.zero)
             {
@@ -71,7 +110,7 @@ namespace Player
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref rotationVelocity,
                     rotationSmoothTime);
 
-                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                transform.parent.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }
         }
     }
