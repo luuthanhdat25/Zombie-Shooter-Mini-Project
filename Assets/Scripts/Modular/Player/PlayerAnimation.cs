@@ -13,7 +13,7 @@ namespace Player
         }
 
         [SerializeField]
-        private KeyBoardMouseMovement playerMovement;
+        private CharactorControllerMovement playerMovement;
 
         private int animIDSpeed;
         private int animIDShoot;
@@ -55,7 +55,7 @@ namespace Player
 
         private void UpdateAnimationBlend()
         {
-            animationBlend = Mathf.Lerp(animationBlend, playerMovement.CurrentSpeed, Time.deltaTime * playerMovement.SpeedChangeRate);
+            //animationBlend = Mathf.Lerp(animationBlend, playerMovement.CurrentSpeed, Time.deltaTime * playerMovement.SpeedChangeRate);
             if (animationBlend < 0.01f) animationBlend = 0f;
             animator.SetFloat(animIDSpeed, animationBlend);
         }

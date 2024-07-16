@@ -1,5 +1,6 @@
 using Enum;
 using UnityEngine;
+using AbstractClass;
 
 namespace ScriptableObjects
 {

@@ -27,14 +27,25 @@ namespace RepeatUtil
             // For override
         }
 
-        public static T LoadComponentInChild<T>(ref T component, GameObject gameObj) where T : Component
+        public static T LoadComponent<T>(ref T component, GameObject gameObj) where T : Component
         {
             if (component != null) return component;
 
-            component = gameObj.GetComponentInChildren<T>();
+            component = gameObj.GetComponent<T>();
+            if (component != null) return component;
+
+            Debug.LogError($"Component [{typeof(T).Name}] doesn't have in GameObject [{gameObj.name}]");
+            return null;
+        }
+
+        public static T LoadComponentInChild<T>(ref T component, GameObject gameObjParent) where T : Component
+        {
+            if (component != null) return component;
+
+            component = gameObjParent.GetComponentInChildren<T>();
             if(component != null) return component;
 
-            Debug.LogError($"Component [{typeof(T).Name}] doesn't have in GameObject [{gameObj.name}] child");
+            Debug.LogError($"Component [{typeof(T).Name}] doesn't have in GameObject [{gameObjParent.name}] child");
             return null;
         }
 
@@ -55,28 +66,6 @@ namespace RepeatUtil
             }
 
             Debug.LogError($"Component [{typeof(T).Name}] not found in parents of GameObject [{gameObj.name}]");
-            return null;
-        }
-
-        //Find component in all children(all children of children) of this transform 
-        protected T FindComponentInChildren<T>() where T : Component
-        {
-            Queue<Transform> queue = new Queue<Transform>();
-            queue.Enqueue(transform);
-
-            while (queue.Count > 0)
-            {
-                Transform current = queue.Dequeue();
-                T foundComponent = current.GetComponent<T>();
-                if (foundComponent != null) return foundComponent;
-
-                int childCount = current.childCount;
-                for (int i = 0; i < childCount; i++)
-                {
-                    Transform child = current.GetChild(i);
-                    queue.Enqueue(child);
-                }
-            }
             return null;
         }
     }

@@ -9,8 +9,13 @@ namespace AbstractClass
         [SerializeField]
         protected float moveSpeed = 2.5f;
 
-        protected abstract void Move(Vector3 moveDirection);
-        protected abstract void Rotate(Vector3 rotateDirection);
+        public virtual float CurrentSpeed()
+        {
+            return moveSpeed;
+        }
+
+        public abstract void Move(Vector3 moveDirection);
+        public abstract void Rotate(Vector3 rotateDirection);
     }
 }
 

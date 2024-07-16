@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class KeyBoardMouseMovement : AbsMovement
+    public class CharactorControllerMovement : AbsMovement
     {
         [SerializeField]
         private CharacterController charactorController;
@@ -23,7 +23,7 @@ namespace Player
         private float targetRotation;
         private float currentSpeed;
 
-        public float CurrentSpeed => currentSpeed;
+        public override float CurrentSpeed() => currentSpeed;
         public float SpeedChangeRate => speedChangeRate;
 
         public const float SPEED_OFFSET = 0.1F;
@@ -34,49 +34,7 @@ namespace Player
             LoadComponentInParent<CharacterController>(ref charactorController, gameObject);
         }
 
-        private void FixedUpdate()
-        {
-            Vector3 moveDirection = GetMoveDirectionFromInput();
-            Move(moveDirection);
-
-            if (InputManager.Instance.IsShootPressed())
-            {
-                Vector3 shootDireciton = GetRotateDirectionFromMouse();
-                Rotate(shootDireciton);
-                //playerShootShoot(shootDireciton);
-            }
-            else
-            {
-                //playerShoot.Shoot(Vector3.zero);
-                Rotate(moveDirection);
-            }
-        }
-
-        private Vector3 GetMoveDirectionFromInput()
-        {
-            Vector2 inputMoveVector2 = InputManager.Instance.GetRawInputNormalized();
-            Vector3 moveDirectionVector3 = GetMoveDirectionVector3(inputMoveVector2);
-            return GetIsometricVectorFromNormalVector(moveDirectionVector3);
-        }
-
-        private Vector3 GetMoveDirectionVector3(Vector2 vector2)
-        {
-            return new Vector3(vector2.x, 0.0f, vector2.y);
-        }
-
-        private Vector3 GetIsometricVectorFromNormalVector(Vector3 normal)
-        {
-            return Quaternion.Euler(0, 45, 0) * normal;
-        }
-
-        private Vector3 GetRotateDirectionFromMouse()
-        {
-            Vector2 mouseDirection = CameraManager.Instance.GetNormalizedMouseDirectionToScreenCenter();
-            Vector3 directionVector3 = GetMoveDirectionVector3(mouseDirection);
-            return GetIsometricVectorFromNormalVector(directionVector3);
-        }
-
-        protected override void Move(Vector3 moveDirection)
+        public override void Move(Vector3 moveDirection)
         {
             if (moveDirection == Vector3.zero) currentSpeed = 0.0f;
 
@@ -102,7 +60,7 @@ namespace Player
             charactorController.Move(moveDirection * (currentSpeed * Time.deltaTime));
         }
 
-        protected override void Rotate(Vector3 rotateDirection)
+        public override void Rotate(Vector3 rotateDirection)
         {
             if (rotateDirection != Vector3.zero)
             {
