@@ -11,9 +11,9 @@ namespace Player
 {
     public class TapHoldShoot : AbsShoot
     {
-        public override void ResetShootValue(GunSO gunSO)
+        public override void ResetShootValue(GunSO gunSO, int projectileLayerMarkIndex)
         {
-            base.ResetShootValue(gunSO);
+            base.ResetShootValue(gunSO, projectileLayerMarkIndex);
             firingTimer = 0;
         }
 
@@ -39,12 +39,14 @@ namespace Player
         {
             Debug.Log("Shoot: " + currentGunSO.Prefab.name);
             GameObject newProjectile = Instantiate(currentGunSO.ProjectileSO.Prefab, initalPosition, Quaternion.identity);
-            AbsController absController = newProjectile.GetComponent<AbsController>();
-            if(absController == null)
+            AbsController projectileController = newProjectile.GetComponent<AbsController>();
+            if(projectileController == null)
             {
                 Debug.LogError(currentGunSO.Prefab.name + " doesn't have controller!");
             }
-            absController.AbsMovement.Move(initalDirection, currentGunSO.ProjectileSO.SpeedMove);
+            projectileController.SetLayerMark(currentProjectileLayerMark);
+            projectileController.AbsDamageSender.SetDamage(currentGunSO.Damage);
+            projectileController.AbsMovement.Move(initalDirection, currentGunSO.ProjectileSO.SpeedMove);
         }
     }
 }

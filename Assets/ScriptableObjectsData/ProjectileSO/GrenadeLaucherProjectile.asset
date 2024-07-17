@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15a28d565fd47a49a95f49483bb7193, type: 3}
   m_Name: GrenadeLaucherProjectile
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 2827842321713982499, guid: fab76d1c58b69d245852377c79b07455, type: 3}
-  SpeedMove: 10
+  Prefab: {fileID: 3813438675327580145, guid: fab76d1c58b69d245852377c79b07455, type: 3}
+  SpeedMove: 3

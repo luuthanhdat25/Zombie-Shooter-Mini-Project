@@ -9,7 +9,7 @@ public class ParabolicMovement : AbsMovement
 
     public override void Move(Vector3 moveDirectionOrDestination, float speed)
     {
-        StartCoroutine(CoroutineMovement(transform.position, moveDirectionOrDestination, height, speed));
+        StartCoroutine(CoroutineMovement(transform.parent.position, moveDirectionOrDestination, height, speed));
     }
 
     public override void Rotate(Vector3 rotateDirection)
@@ -33,16 +33,15 @@ public class ParabolicMovement : AbsMovement
         while (Time.time < startTime + journeyTime)
         {
             float progress = (Time.time - startTime) / journeyTime;
-            transform.position = Vector3.Slerp(startRelative, endRelative, progress) + centerPivot;
+            transform.parent.position = Vector3.Slerp(startRelative, endRelative, progress) + centerPivot;
 
-            Vector3 directionNormalize = (transform.position - previousPosition).normalized;
-            transform.rotation = Quaternion.LookRotation(directionNormalize);
+            Vector3 directionNormalize = (transform.parent.position - previousPosition).normalized;
+            transform.parent.rotation = Quaternion.LookRotation(directionNormalize);
 
-            previousPosition = transform.position;
+            previousPosition = transform.parent.position;
             yield return null;
         }
 
-        transform.position = end;
-        Debug.Log("Booom");
+        transform.parent.position = end;
     }
 }

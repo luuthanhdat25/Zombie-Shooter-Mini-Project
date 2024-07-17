@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4809236909008835632}
   - component: {fileID: 4471790883126445684}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4418018652007857999}
   - component: {fileID: 6325670961223182064}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: dot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 5874571496857686867}
   - component: {fileID: 3427398450866907583}
   - component: {fileID: 4258754288977289869}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: AssaultRifle_Prefab
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -166,7 +166,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8171811910629257928}
-  - {fileID: 5359186856111984231}
   - {fileID: 1035740907108047059}
   - {fileID: 3176469122162669452}
   - {fileID: 4809236909008835632}
@@ -217,7 +216,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   absGraphic: {fileID: 9180391492560841748}
   absAnimator: {fileID: 4471790883126445684}
-  absTag: {fileID: 6797376001648347941}
   absMovement: {fileID: 819985320743826903}
   absVisionSensor: {fileID: 2892553509573608991}
   absHearingSensor: {fileID: 6547468019878580137}
@@ -235,7 +233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7359111819460396581}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bone.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1142485521460910837}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: suppressor_c_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4090204631218942167}
   - component: {fileID: 2743861996961208846}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Stat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1035740907108047059}
   - component: {fileID: 9180391492560841748}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +385,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1117866008412964988}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bone.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +416,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2473864583765985299}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: auga1_rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +449,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9036148262514272890}
   - component: {fileID: 2610353544473370592}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: VisionSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -495,7 +493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1590469057362218682}
   - component: {fileID: 2286494470089916405}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -584,7 +582,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2871767766863349176}
   - component: {fileID: 6547468019878580137}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: HearingSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -628,7 +626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7980523442863137138}
   - component: {fileID: 6192693753660529180}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: 5,56x45
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -717,7 +715,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3176469122162669452}
   - component: {fileID: 819985320743826903}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Movement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -761,7 +759,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3054307099688393467}
   - component: {fileID: 1874860242494407775}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: auga1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -855,7 +853,7 @@ GameObject:
   - component: {fileID: 5677643133661840007}
   - component: {fileID: 702336051606815256}
   - component: {fileID: 7131105985498201215}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: suppressor_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -936,7 +934,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3200169011843312804}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AugA1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -969,7 +967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5005569664264231355}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -994,52 +992,6 @@ Transform:
   - {fileID: 602492085951460764}
   m_Father: {fileID: 2473864583765985299}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6842504164197537516
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5359186856111984231}
-  - component: {fileID: 6797376001648347941}
-  m_Layer: 6
-  m_Name: Tag
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5359186856111984231
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6842504164197537516}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7985338078800368095}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6797376001648347941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6842504164197537516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea6bd2a60a9b8e2428db012480c010e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tags: 
-  collisionTags: 
 --- !u!1 &7030229924468343734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,7 +1001,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 962399939489456053}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Shooting Point
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -1080,7 +1032,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 602492085951460764}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bone.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1112,7 +1064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8171811910629257928}
   - component: {fileID: 2892553509573608991}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: VisionSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1156,7 +1108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 463911826358335537}
   - component: {fileID: 5493132207501039367}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1244,7 +1196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4139413286768745017}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

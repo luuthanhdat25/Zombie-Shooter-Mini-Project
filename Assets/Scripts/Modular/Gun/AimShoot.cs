@@ -1,18 +1,14 @@
 using AbstractClass;
-using Enum;
-using Projectile;
 using ScriptableObjects;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AimShoot : AbsShoot
 {
     private float aimTimer;
 
-    public override void ResetShootValue(GunSO gunSO)
+    public override void ResetShootValue(GunSO gunSO, int projectileLayerMarkIndex)
     {
-        base.ResetShootValue(gunSO);
+        base.ResetShootValue(gunSO, projectileLayerMarkIndex);
         firingTimer = FireRateToTimeDelayShoot(gunSO.FireRate);
         aimTimer = 0;
     }
@@ -42,14 +38,15 @@ public class AimShoot : AbsShoot
     {
         Debug.Log("Shoot: " + currentGunSO.Prefab.name);
         GameObject newProjectile = Instantiate(currentGunSO.ProjectileSO.Prefab, initalPosition, Quaternion.identity);
-        AbsController absController = newProjectile.GetComponent<AbsController>();
-        if (absController == null)
+        AbsController projectileController = newProjectile.GetComponent<AbsController>();
+        if (projectileController == null)
         {
             Debug.LogError(currentGunSO.Prefab.name + " doesn't have controller!");
         }
-        //Caculate destination
-        Vector3 destination = releasePosition;
-        absController.AbsMovement.Move(destination, currentGunSO.ProjectileSO.SpeedMove);
+        Debug.Log(currentProjectileLayerMark);
+        projectileController.SetLayerMark(currentProjectileLayerMark);
+        projectileController.AbsDamageSender.SetDamage(currentGunSO.Damage);
+        projectileController.AbsMovement.Move(releasePosition, currentGunSO.ProjectileSO.SpeedMove);
     }
 
     public float AimProcessNormalize()

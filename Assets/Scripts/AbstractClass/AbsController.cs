@@ -14,10 +14,6 @@ namespace AbstractClass
         public AbsAnimator AbsAnimator => absAnimator;
 
         [SerializeField]
-        protected AbsTag absTag;
-        public AbsTag AbsTag => absTag;
-
-        [SerializeField]
         protected AbsMovement absMovement;
         public AbsMovement AbsMovement => absMovement;
 
@@ -47,7 +43,6 @@ namespace AbstractClass
             base.LoadComponents();
             LoadComponentInChild<AbsGraphic>(ref absGraphic, gameObject);
             LoadComponentInChild<AbsAnimator>(ref absAnimator, gameObject);
-            LoadComponentInChild<AbsTag>(ref absTag, gameObject);
             LoadComponentInChild<AbsMovement>(ref absMovement, gameObject);
             LoadComponentInChild<AbsVisionSensor>(ref absVisionSensor, gameObject);
             LoadComponentInChild<AbsHearingSensor>(ref absHearingSensor, gameObject);
@@ -55,6 +50,8 @@ namespace AbstractClass
             LoadComponent<AbsDamageSender>(ref absDamageSender, gameObject);
             LoadComponent<AbsDamageReciver>(ref absDamageReciver, gameObject);
         }
+
+        public virtual void SetLayerMark(int layerMaskIndex) => gameObject.layer = layerMaskIndex;
     }
 }
 

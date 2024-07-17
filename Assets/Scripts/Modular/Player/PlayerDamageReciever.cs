@@ -12,9 +12,6 @@ namespace Player
             AbsController absControllerHit = hit.gameObject.GetComponent<AbsController>();
             if(absControllerHit == null) return;
             
-            var hitTagList = absControllerHit.AbsTag.TagList;
-            if (!absController.AbsTag.IsCollision(hitTagList)) return;
-            
             AbsDamageSender damageSender = absControllerHit.AbsDamageSender;
             Collision(damageSender);
 

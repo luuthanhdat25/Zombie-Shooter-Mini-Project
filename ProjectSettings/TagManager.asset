@@ -13,9 +13,9 @@ TagManager:
   - Water
   - UI
   - Player
-  - Zombie
-  - 
-  - 
+  - Enemy
+  - PlayerProjectile
+  - EnemyProjectile
   - 
   - 
   - 

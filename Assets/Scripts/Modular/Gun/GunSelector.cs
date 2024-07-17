@@ -38,6 +38,9 @@ public class GunSelector : RepeatMonoBehaviour
     [SerializeField]
     private bool holdGunOnStart;
 
+    [SerializeField]
+    private int projectileLayerMarkIndex;
+
     private List<GunController> gunControllerList;
     private int indexSelectGun;
     private Dictionary<ShootType, AbsShoot> shootTypeDictionary;
@@ -84,7 +87,7 @@ public class GunSelector : RepeatMonoBehaviour
         gunControllerList.ForEach(gunController => gunController.gameObject.SetActive(false));
         gunControllerList[indexSelectGun].gameObject.SetActive(true);
         
-        shootTypeDictionary[gunSOList[indexSelectGun].ShootType].ResetShootValue(gunSOList[indexSelectGun]);
+        shootTypeDictionary[gunSOList[indexSelectGun].ShootType].ResetShootValue(gunSOList[indexSelectGun], projectileLayerMarkIndex);
         OnSwitchGun?.Invoke(this, new OnSwitchGunEventArgs
         {
             GunSO = gunSOList[indexSelectGun]
@@ -149,8 +152,6 @@ public class GunSelector : RepeatMonoBehaviour
         if (CurrentGunController().IsOutOfBullet()) return;
 
         int numberOfBullet = CurrentGunController().GetBulletCanUse();
-        Debug.Log("Using: " + numberOfBullet);
-
         if(numberOfBullet != 0)
         {
             if(CurrentAbsShoot().ShootHold(shootDirection, CurrentShootPosition(), numberOfBullet))
@@ -193,8 +194,6 @@ public class GunSelector : RepeatMonoBehaviour
 
 
         int numberOfBullet = CurrentGunController().GetBulletCanUse();
-        Debug.Log("Unusing: " + numberOfBullet);
-
         if (numberOfBullet != 0)
         {
             if (CurrentAbsShoot().ShootRelease(releasePosition, CurrentShootPosition(), numberOfBullet))

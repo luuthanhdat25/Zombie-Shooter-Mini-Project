@@ -14,7 +14,7 @@ namespace AbstractClass
         public virtual int GetDamage() => damage;
 
         /// <summary>
-        /// Called when hit the target.
+        /// Called when got hit.
         /// </summary>
         public abstract void GotHit();
 

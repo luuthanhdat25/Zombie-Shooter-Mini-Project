@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3125279744311057818}
   - component: {fileID: 7953149701591276715}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: grenades_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3396433554189956480}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Shooting Point
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -136,7 +136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3513865421016477182}
   - component: {fileID: 1064769239693402071}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1408190916263390163}
   - component: {fileID: 1317129583635115507}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Stat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5264602653107132179}
   - component: {fileID: 4953942247612114422}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: glass_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9212171342193657263}
   - component: {fileID: 3802124671763370568}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: cap.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6902522507450709628}
   - component: {fileID: 4055433830850920381}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: glass_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,7 +506,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4564999671322805658}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: grenade.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,7 +537,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5648743359610550287}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +570,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7752974674690654804}
   - component: {fileID: 5047768314901897223}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: grenades_E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -664,7 +664,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7587020231325395904}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: M32_rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -697,7 +697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8362666765136278966}
   - component: {fileID: 1670963400227065603}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: grenades_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -791,7 +791,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7421196229875204022}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: grenade.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -823,7 +823,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8462756794249728582}
   - component: {fileID: 828818130247304468}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: grenades_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -920,7 +920,7 @@ GameObject:
   - component: {fileID: 4139945152881470431}
   - component: {fileID: 8558338808012687411}
   - component: {fileID: 6788366674524111052}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: GrenadeLauncher_Prefab
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -941,7 +941,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1684656165204226459}
-  - {fileID: 2517827970114486021}
   - {fileID: 3513865421016477182}
   - {fileID: 8390773147235247174}
   - {fileID: 8391932008716835118}
@@ -992,7 +991,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   absGraphic: {fileID: 1064769239693402071}
   absAnimator: {fileID: 5565675485349997504}
-  absTag: {fileID: 4524960862573991443}
   absMovement: {fileID: 5506987688490632957}
   absVisionSensor: {fileID: 8085929428596825245}
   absHearingSensor: {fileID: 4086187954050286314}
@@ -1010,7 +1008,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2198264657697962668}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: grenade.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1041,7 +1039,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2469827976896551966}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: grenade.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1073,7 +1071,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8390773147235247174}
   - component: {fileID: 5506987688490632957}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Movement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1117,7 +1115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1131133495917646060}
   - component: {fileID: 4351817614491461957}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: cap.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1210,7 +1208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7389866573476374048}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: reload
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1243,7 +1241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4260805926934937825}
   - component: {fileID: 6012993553319462667}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: cap.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1337,7 +1335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6399376930757575828}
   - component: {fileID: 3924859283329968443}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Dot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1431,7 +1429,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3427916658085246426}
   - component: {fileID: 4442241622290966954}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: grenades_F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1526,7 +1524,7 @@ GameObject:
   m_Component:
   - component: {fileID: 844371442807281927}
   - component: {fileID: 4086187954050286314}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: HearingSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1570,7 +1568,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5826097893624794953}
   - component: {fileID: 2534874522049219181}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: VisionSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1613,7 +1611,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7865474469500437766}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: grenade.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1644,7 +1642,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2517062260562716022}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1676,7 +1674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1684656165204226459}
   - component: {fileID: 8085929428596825245}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: VisionSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1720,7 +1718,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3941276944961505206}
   - component: {fileID: 6878815620461674976}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1813,7 +1811,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6178559102654135541}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: drum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1841,52 +1839,6 @@ Transform:
   - {fileID: 2198264657697962668}
   m_Father: {fileID: 7389866573476374048}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8742751641069940563
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2517827970114486021}
-  - component: {fileID: 4524960862573991443}
-  m_Layer: 6
-  m_Name: Tag
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2517827970114486021
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8742751641069940563}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9161805522892724430}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4524960862573991443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8742751641069940563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea6bd2a60a9b8e2428db012480c010e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tags: 
-  collisionTags: 
 --- !u!1 &8823984579051932100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1897,7 +1849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3885607086757362727}
   - component: {fileID: 3204223297954801727}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: cap.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1991,7 +1943,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5314567274961356132}
   - component: {fileID: 8777596659496376877}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: cap.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2085,7 +2037,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4399805526570726388}
   - component: {fileID: 1637530973500450860}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: m32
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2188,7 +2140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8391932008716835118}
   - component: {fileID: 5565675485349997504}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2232,7 +2184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9011144932273569383}
   - component: {fileID: 6801497909004872911}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: grenades_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2326,7 +2278,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629446520725631444}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

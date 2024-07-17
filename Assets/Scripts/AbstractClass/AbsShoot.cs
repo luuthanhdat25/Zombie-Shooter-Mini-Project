@@ -8,6 +8,7 @@ namespace AbstractClass
     {
         protected float firingTimer;
         protected GunSO currentGunSO;
+        protected int currentProjectileLayerMark;
 
         /// <summary>
         /// Call when hold Shoot
@@ -27,9 +28,10 @@ namespace AbstractClass
         /// <returns>Return true when shoot successfull</returns>
         public abstract bool ShootRelease(Vector3 releasePosition, Vector3 initalPosition, int numberOfBullet);
 
-        public virtual void ResetShootValue(GunSO newGunSO)
+        public virtual void ResetShootValue(GunSO newGunSO, int projectileLayerMarkIndex)
         {
             currentGunSO = newGunSO;
+            currentProjectileLayerMark = projectileLayerMarkIndex;
         }
 
         protected float FireRateToTimeDelayShoot(float fireRate) => 1f / fireRate;

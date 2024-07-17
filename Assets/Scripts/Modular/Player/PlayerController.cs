@@ -15,6 +15,11 @@ namespace Player
         [SerializeField]
         private GunSelector gunSelector;
 
+        [SerializeField]
+        private LayerMask groundLayerMark;
+
+        private RaycastHit hitInfo;
+
         protected override void LoadComponents()
         {
             base.LoadComponents();
@@ -40,7 +45,12 @@ namespace Player
             }
             else
             {
-                gunSelector.UnUsingGun(Vector3.zero);
+                Ray ray = CameraManager.Instance.GetRayFromMousePosition();
+                if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, groundLayerMark))
+                {
+                    gunSelector.UnUsingGun(hitInfo.point);
+                }
+                
                 absMovement.Rotate(moveDirection);
             }
         }
