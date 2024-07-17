@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using AbstractClass;
 using UnityEngine;
 
-public class NullMovement : MonoBehaviour
+public class NullMovement : AbsMovement
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Move(Vector3 moveDirectionOrDestination, float speed)
     {
-        
+        return;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Rotate(Vector3 rotateDirection)
     {
-        
+        return;
     }
 }

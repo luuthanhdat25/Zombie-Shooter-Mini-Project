@@ -17,7 +17,7 @@ namespace Player
             firingTimer = 0;
         }
 
-        public override void ShootHold(Vector3 initalDirection, Vector3 initalPosition)
+        public override bool ShootHold(Vector3 initalDirection, Vector3 initalPosition, int numberOfBullet)
         {
             firingTimer += Time.fixedDeltaTime;
 
@@ -25,11 +25,15 @@ namespace Player
             {
                 SpawnProjetile(initalDirection, initalPosition);
                 firingTimer = 0;
+                return true;
             }
+            return false;
         }
 
-        public override void ShootRelease(Vector3 releasePosition, Vector3 initalPosition)
-        {}
+        public override bool ShootRelease(Vector3 releasePosition, Vector3 initalPosition, int numberOfBullet)
+        {
+            return false;
+        }
 
         private void SpawnProjetile(Vector3 initalDirection, Vector3 initalPosition)
         {

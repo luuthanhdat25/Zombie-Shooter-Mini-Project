@@ -1,21 +1,21 @@
+using AbstractClass;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileParabolicMove : MonoBehaviour
+public class ParabolicMovement : AbsMovement
 {
-    public Transform a;
-    public Transform b;
-    public float height;
-    public float speed;
+    [SerializeField]
+    private float height;
 
-
-    private void Start()
+    public override void Move(Vector3 moveDirectionOrDestination, float speed)
     {
-        StartCoroutine(CoroutineMovement(a.position, b.position, height, speed));
+        StartCoroutine(CoroutineMovement(transform.position, moveDirectionOrDestination, height, speed));
     }
 
-    IEnumerator CoroutineMovement(Vector3 start, Vector3 end, float height, float speed)
+    public override void Rotate(Vector3 rotateDirection)
+    {}
+
+    private IEnumerator CoroutineMovement(Vector3 start, Vector3 end, float height, float speed)
     {
         var centerPivot = (start + end) / 2;
         centerPivot -= new Vector3(0, height);
@@ -28,15 +28,21 @@ public class ProjectileParabolicMove : MonoBehaviour
 
         float startTime = Time.time;
 
+        Vector3 previousPosition = start;
+
         while (Time.time < startTime + journeyTime)
         {
             float progress = (Time.time - startTime) / journeyTime;
             transform.position = Vector3.Slerp(startRelative, endRelative, progress) + centerPivot;
+
+            Vector3 directionNormalize = (transform.position - previousPosition).normalized;
+            transform.rotation = Quaternion.LookRotation(directionNormalize);
+
+            previousPosition = transform.position;
             yield return null;
         }
 
         transform.position = end;
         Debug.Log("Booom");
     }
-
 }

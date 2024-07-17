@@ -1,6 +1,5 @@
 using Enum;
 using UnityEngine;
-using AbstractClass;
 
 namespace ScriptableObjects
 {
@@ -8,6 +7,7 @@ namespace ScriptableObjects
     public class GunSO : ScriptableObject
     {
         public string Name;
+        public Sprite ImageSprite;
         public GameObject Prefab;
         public ProjectileSO ProjectileSO;
         public GunType GunType;
@@ -21,14 +21,20 @@ namespace ScriptableObjects
         [Range(1, 1000)]
         public int Damage;
 
-        [Range(1, 1000)]
-        public int MaxProjectile;
-
         [Range(0.1f, 50f)]
         public float ReloadDuration;
 
         [Range(1f, 20f)]
         public float AimDuration;
+
+        [Range(1, 1000)]
+        public int NumberBulletShootOneTime = 1;
+
+        [Range(1, 1000)]
+        public int NumberBulletReload;
+
+        [Range(1, 1000)]
+        public int NumberBulletMax;
     }
 }
 

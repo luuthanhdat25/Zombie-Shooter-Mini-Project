@@ -8,13 +8,22 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GunSelector : RepeatMonoBehaviour
 {
     public EventHandler<OnSwitchGunEventArgs> OnSwitchGun;
+    public EventHandler<OnReloadEventArgs> OnReloadGun;
+
     public class OnSwitchGunEventArgs : EventArgs
     {
         public GunSO GunSO;
+    }
+
+    public class OnReloadEventArgs : EventArgs
+    {
+        public int CurrentBullet;
+        public int TotalBullet;
     }
 
     [SerializeField]
@@ -29,7 +38,7 @@ public class GunSelector : RepeatMonoBehaviour
     private List<GunController> gunControllerList;
     private int indexSelectGun;
     private Dictionary<ShootType, AbsShoot> shootTypeDictionary;
-    private bool isUnUsingGun = false;
+    private bool isUnUsingGun = true;
 
     protected override void Awake()
     {
@@ -66,6 +75,7 @@ public class GunSelector : RepeatMonoBehaviour
     private void ActiveGun(int indexSelectGun)
     {
         if (indexSelectGun < 0 || indexSelectGun >= gunSOList.Count) return;
+
         gunControllerList.ForEach(gunController => gunController.gameObject.SetActive(false));
         gunControllerList[indexSelectGun].gameObject.SetActive(true);
         
@@ -88,17 +98,53 @@ public class GunSelector : RepeatMonoBehaviour
     public void UsingGun(Vector3 shootDirection)
     {
         isUnUsingGun = false;
-        CurrentAbsShoot().ShootHold(shootDirection, CurrentShootPosition());
+        if (CurrentGunController().IsOutOfBullet())
+        {
+            Debug.Log("Run of of Bullet"); return;
+        }
+
+        int numberOfBullet = CurrentGunController().GetBulletCanUse();
+        Debug.Log("Using: " + numberOfBullet);
+
+        if(numberOfBullet != 0)
+        {
+            if(CurrentAbsShoot().ShootHold(shootDirection, CurrentShootPosition(), numberOfBullet))
+            {
+                CurrentGunController().DeductBullet(numberOfBullet);
+            }
+        }
+        else
+        {
+            CurrentGunController().Reload();
+        }
     }
 
     public void UnUsingGun(Vector3 releasePosition)
     {
-        if(isUnUsingGun) return;
+        if (isUnUsingGun) return;
 
         isUnUsingGun = true;
-        CurrentAbsShoot().ShootRelease(releasePosition, CurrentShootPosition());
+        if (CurrentGunController().IsOutOfBullet()) {
+            Debug.Log("Run of of Bullet"); return;
+        }
+
+        int numberOfBullet = CurrentGunController().GetBulletCanUse();
+        Debug.Log("Unusing: " + numberOfBullet);
+
+        if (numberOfBullet != 0)
+        {
+            if (CurrentAbsShoot().ShootRelease(releasePosition, CurrentShootPosition(), numberOfBullet))
+            {
+                CurrentGunController().DeductBullet(numberOfBullet);
+            }
+        }
+        else
+        {
+            CurrentGunController().Reload();
+        }
     }
 
+    private GunController CurrentGunController() => gunControllerList[indexSelectGun];
     private AbsShoot CurrentAbsShoot() => shootTypeDictionary[gunSOList[indexSelectGun].ShootType];
     private Vector3 CurrentShootPosition() => gunControllerList[indexSelectGun].ShootingPoition();
 }

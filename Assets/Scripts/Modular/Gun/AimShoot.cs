@@ -17,21 +17,25 @@ public class AimShoot : AbsShoot
         aimTimer = 0;
     }
 
-    public override void ShootHold(Vector3 initalDirection, Vector3 initalPosition)
+    public override bool ShootHold(Vector3 initalDirection, Vector3 initalPosition, int numberOfBullet)
     {
         firingTimer += Time.fixedDeltaTime;
         aimTimer += Time.fixedDeltaTime;
+        return false;
     }
 
-    public override void ShootRelease(Vector3 releasePosition, Vector3 initalPosition)
+    public override bool ShootRelease(Vector3 releasePosition, Vector3 initalPosition, int numberOfBullet)
     {
+        bool isShoot = false;
         if (firingTimer >= FireRateToTimeDelayShoot(currentGunSO.FireRate)
             && aimTimer >= currentGunSO.AimDuration)
         {
             SpawnProjetile(releasePosition, initalPosition);
+            isShoot = true;
         }
         aimTimer = 0;
         firingTimer = 0;
+        return isShoot;
     }
 
     private void SpawnProjetile(Vector3 releasePosition, Vector3 initalPosition)

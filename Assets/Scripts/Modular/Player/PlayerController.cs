@@ -1,6 +1,5 @@
 using AbstractClass;
 using Manager;
-using RepeatUtil.DesignPattern.SingletonPattern;
 using UnityEngine;
 
 namespace Player
@@ -19,8 +18,13 @@ namespace Player
         {
             base.LoadComponents();
             LoadComponent<GunSelector>(ref gunSelector, gameObject);
+            InputManager.Instance.OnSwitchGun += InputManager_OnSwitchGun;
         }
 
+        private void InputManager_OnSwitchGun()
+        {
+            gunSelector.SwitchGunNext();
+        }
 
         private void FixedUpdate()
         {
