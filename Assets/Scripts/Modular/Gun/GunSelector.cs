@@ -29,6 +29,7 @@ public class GunSelector : RepeatMonoBehaviour
     private List<GunController> gunControllerList;
     private int indexSelectGun;
     private Dictionary<ShootType, AbsShoot> shootTypeDictionary;
+    private bool isUnUsingGun = false;
 
     protected override void Awake()
     {
@@ -86,24 +87,18 @@ public class GunSelector : RepeatMonoBehaviour
 
     public void UsingGun(Vector3 shootDirection)
     {
-        ShootData shootData = new ShootData
-        {
-            InitialDirection = shootDirection,
-            InitialPosition = gunControllerList[indexSelectGun].ShootingPoition(),
-            GunSO = gunSOList[indexSelectGun]
-        };
-        shootTypeDictionary[gunSOList[indexSelectGun].ShootType].ShootHold(shootData);
+        isUnUsingGun = false;
+        CurrentAbsShoot().ShootHold(shootDirection, CurrentShootPosition());
     }
 
-    public void UnUsingGun(Vector3 shootDirection)
+    public void UnUsingGun(Vector3 releasePosition)
     {
-        GunSO currentGun = gunSOList[indexSelectGun];
-        ShootData shootData = new ShootData
-        {
-            InitialDirection = shootDirection,
-            InitialPosition = gunControllerList[indexSelectGun].ShootingPoition(),
-            GunSO = currentGun
-        };
-        shootTypeDictionary[gunSOList[indexSelectGun].ShootType].ShootRelease(shootData);
+        if(isUnUsingGun) return;
+
+        isUnUsingGun = true;
+        CurrentAbsShoot().ShootRelease(releasePosition, CurrentShootPosition());
     }
+
+    private AbsShoot CurrentAbsShoot() => shootTypeDictionary[gunSOList[indexSelectGun].ShootType];
+    private Vector3 CurrentShootPosition() => gunControllerList[indexSelectGun].ShootingPoition();
 }
