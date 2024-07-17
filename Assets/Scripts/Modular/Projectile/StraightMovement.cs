@@ -6,7 +6,7 @@ namespace Projectile
     public class StraightMovement : AbsMovement
     {
         [SerializeField]
-        private Rigidbody rigidbody;
+        private new Rigidbody rigidbody;
 
         protected override void LoadComponents()
         {

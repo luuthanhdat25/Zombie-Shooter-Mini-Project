@@ -23,5 +23,5 @@ MonoBehaviour:
   ReloadDuration: 2
   AimDuration: 2
   NumberBulletShootOneTime: 1
-  NumberBulletReload: 30
-  NumberBulletMax: 100
+  NumberBulletReload: 15
+  NumberBulletMax: 40

@@ -11,11 +11,15 @@ public class GunController : AbsController
     [SerializeField]
     private GunSO gunSO;
 
-    private int totalBullet;
     private int currentBullet;
+    private int totalBullet;
 
-    public void Start()
+    public int CurrentBullet => currentBullet;
+    public int TotalBullet => totalBullet;
+
+    protected override void Awake()
     {
+        base.Awake();
         if (gunSO == null) Debug.LogError($"{gameObject.name} doesn't have GunSO");
         totalBullet = gunSO.NumberBulletMax;
         currentBullet = gunSO.NumberBulletReload;
@@ -39,7 +43,7 @@ public class GunController : AbsController
         totalBullet -= numberBulletsReload;
     }
 
-    public void DeductBullet(int valueDeduct)
+    public void DeductCurrentBullet(int valueDeduct)
     {
         if(currentBullet >= valueDeduct)
         {
@@ -52,5 +56,6 @@ public class GunController : AbsController
     }
 
     public bool IsOutOfBullet() => currentBullet <= 0 && totalBullet <= 0;
+    
     public Vector3 ShootingPoition() => shootingPoint.position;
 }

@@ -1,5 +1,6 @@
 using AbstractClass;
 using Manager;
+using System;
 using UnityEngine;
 
 namespace Player
@@ -19,12 +20,12 @@ namespace Player
             base.LoadComponents();
             LoadComponent<GunSelector>(ref gunSelector, gameObject);
             InputManager.Instance.OnSwitchGun += InputManager_OnSwitchGun;
+            InputManager.Instance.OnReloadGun += InputManager_OnReloadGun;
         }
 
-        private void InputManager_OnSwitchGun()
-        {
-            gunSelector.SwitchGunNext();
-        }
+        private void InputManager_OnSwitchGun() => gunSelector.SwitchGunNext();
+
+        private void InputManager_OnReloadGun() => gunSelector.Reload();
 
         private void FixedUpdate()
         {

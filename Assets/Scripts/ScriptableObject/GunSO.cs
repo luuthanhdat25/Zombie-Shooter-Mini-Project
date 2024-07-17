@@ -24,7 +24,7 @@ namespace ScriptableObjects
         [Range(0.1f, 50f)]
         public float ReloadDuration;
 
-        [Range(1f, 20f)]
+        [Range(0.1f, 15f)]
         public float AimDuration;
 
         [Range(1, 1000)]

@@ -21,7 +21,7 @@ MonoBehaviour:
   FireRate: 1
   Damage: 10
   ReloadDuration: 4
-  AimDuration: 2
-  NumberBulletShootOneTime: 0
+  AimDuration: 1.5
+  NumberBulletShootOneTime: 1
   NumberBulletReload: 5
   NumberBulletMax: 20

@@ -1,19 +1,17 @@
 using AbstractClass;
 using Enum;
-using Manager;
 using Player;
 using RepeatUtil;
 using ScriptableObjects;
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class GunSelector : RepeatMonoBehaviour
 {
     public EventHandler<OnSwitchGunEventArgs> OnSwitchGun;
-    public EventHandler<OnReloadEventArgs> OnReloadGun;
+    public EventHandler<OnReloadEventArgs> OnUpdatedReloadTimer;
+    public EventHandler<OnUpdatedBulletEventArgs> OnUpdatedBullet;
 
     public class OnSwitchGunEventArgs : EventArgs
     {
@@ -22,8 +20,13 @@ public class GunSelector : RepeatMonoBehaviour
 
     public class OnReloadEventArgs : EventArgs
     {
-        public int CurrentBullet;
-        public int TotalBullet;
+        public float ReloadtimerNormalize;
+    }
+
+    public class OnUpdatedBulletEventArgs : EventArgs
+    {
+        public float CurrentBullet;
+        public float TotalBullet;
     }
 
     [SerializeField]
@@ -39,6 +42,8 @@ public class GunSelector : RepeatMonoBehaviour
     private int indexSelectGun;
     private Dictionary<ShootType, AbsShoot> shootTypeDictionary;
     private bool isUnUsingGun = true;
+    private float reloadTimer;
+    private bool isReloading;
 
     protected override void Awake()
     {
@@ -84,6 +89,11 @@ public class GunSelector : RepeatMonoBehaviour
         {
             GunSO = gunSOList[indexSelectGun]
         });
+        OnUpdatedBullet?.Invoke(this, new OnUpdatedBulletEventArgs
+        {
+            CurrentBullet = CurrentGunController().CurrentBullet,
+            TotalBullet = CurrentGunController().TotalBullet
+        });
     }
 
     public void SwitchGunNext()
@@ -93,15 +103,50 @@ public class GunSelector : RepeatMonoBehaviour
         indexSelectGun = indexSelectGun >= gunSOList.Count ? 0 : indexSelectGun;
         
         ActiveGun(indexSelectGun);
+        isReloading = false;
+        reloadTimer = 0;
+
+        if (!CurrentGunController().IsOutOfBullet() && CurrentGunController().CurrentBullet == 0)
+        {
+            Reload();
+        }
+        OnUpdatedReloadTimer?.Invoke(this, new OnReloadEventArgs
+        {
+            ReloadtimerNormalize = 0
+        });
+    }
+
+    private void FixedUpdate() => HandleReload();
+
+    private void HandleReload()
+    {
+        if (!isReloading) return;
+
+        reloadTimer += Time.fixedDeltaTime;
+        if (reloadTimer >= CurrentGunSO().ReloadDuration)
+        {
+            isReloading = false;
+            reloadTimer = 0;
+            CurrentGunController().Reload();
+            OnUpdatedBullet?.Invoke(this, new OnUpdatedBulletEventArgs
+            {
+                CurrentBullet = CurrentGunController().CurrentBullet,
+                TotalBullet = CurrentGunController().TotalBullet
+            });
+        }
+
+        OnUpdatedReloadTimer?.Invoke(this, new OnReloadEventArgs
+        {
+            ReloadtimerNormalize = reloadTimer / CurrentGunSO().ReloadDuration
+        });
     }
 
     public void UsingGun(Vector3 shootDirection)
     {
+        if (isReloading) return;
+
         isUnUsingGun = false;
-        if (CurrentGunController().IsOutOfBullet())
-        {
-            Debug.Log("Run of of Bullet"); return;
-        }
+        if (CurrentGunController().IsOutOfBullet()) return;
 
         int numberOfBullet = CurrentGunController().GetBulletCanUse();
         Debug.Log("Using: " + numberOfBullet);
@@ -110,23 +155,42 @@ public class GunSelector : RepeatMonoBehaviour
         {
             if(CurrentAbsShoot().ShootHold(shootDirection, CurrentShootPosition(), numberOfBullet))
             {
-                CurrentGunController().DeductBullet(numberOfBullet);
+                CurrentGunController().DeductCurrentBullet(numberOfBullet);
+                if (!CurrentGunController().IsOutOfBullet() && CurrentGunController().CurrentBullet == 0)
+                {
+                    Reload();
+                }
+                OnUpdatedBullet?.Invoke(this, new OnUpdatedBulletEventArgs
+                {
+                    CurrentBullet = CurrentGunController().CurrentBullet,
+                    TotalBullet = CurrentGunController().TotalBullet
+                });
             }
         }
         else
         {
-            CurrentGunController().Reload();
+            Reload();
         }
+    }
+
+    public void Reload()
+    {
+        isReloading = true;
+        reloadTimer = 0;
+        OnUpdatedReloadTimer?.Invoke(this, new OnReloadEventArgs
+        {
+            ReloadtimerNormalize = 0
+        });
     }
 
     public void UnUsingGun(Vector3 releasePosition)
     {
+        if (isReloading) return;
         if (isUnUsingGun) return;
 
         isUnUsingGun = true;
-        if (CurrentGunController().IsOutOfBullet()) {
-            Debug.Log("Run of of Bullet"); return;
-        }
+        if (CurrentGunController().IsOutOfBullet()) return;
+
 
         int numberOfBullet = CurrentGunController().GetBulletCanUse();
         Debug.Log("Unusing: " + numberOfBullet);
@@ -135,15 +199,26 @@ public class GunSelector : RepeatMonoBehaviour
         {
             if (CurrentAbsShoot().ShootRelease(releasePosition, CurrentShootPosition(), numberOfBullet))
             {
-                CurrentGunController().DeductBullet(numberOfBullet);
+                CurrentGunController().DeductCurrentBullet(numberOfBullet);
+                if (!CurrentGunController().IsOutOfBullet() && CurrentGunController().CurrentBullet == 0)
+                {
+                    Reload();
+                }
+                OnUpdatedBullet?.Invoke(this, new OnUpdatedBulletEventArgs
+                {
+                    CurrentBullet = CurrentGunController().CurrentBullet,
+                    TotalBullet = CurrentGunController().TotalBullet
+                });
             }
         }
         else
         {
-            CurrentGunController().Reload();
+            Reload();
         }
     }
 
+
+    private GunSO CurrentGunSO() => gunSOList[indexSelectGun];
     private GunController CurrentGunController() => gunControllerList[indexSelectGun];
     private AbsShoot CurrentAbsShoot() => shootTypeDictionary[gunSOList[indexSelectGun].ShootType];
     private Vector3 CurrentShootPosition() => gunControllerList[indexSelectGun].ShootingPoition();
