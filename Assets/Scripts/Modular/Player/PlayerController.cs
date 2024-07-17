@@ -1,37 +1,57 @@
+using AbstractClass;
 using Manager;
-using RepeatUtil.DesignPattern.SingletonPattern;
+using System;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerController : Singleton<PlayerController>
+    public class PlayerController : AbsController
     {
+        [Space]
+        [Header("Player Controller")]
         [SerializeField]
-        private PlayerMovement playerMovement;
+        private PlayerSO playerSO;
 
         [SerializeField]
-        private PlayerRotation playerRotation;
+        private GunSelector gunSelector;
 
         [SerializeField]
-        private PlayerShoot playerShoot;
+        private LayerMask groundLayerMark;
 
-        public PlayerMovement PlayerMovement => playerMovement;
+        private RaycastHit hitInfo;
+
+        protected override void LoadComponents()
+        {
+            base.LoadComponents();
+            LoadComponent<GunSelector>(ref gunSelector, gameObject);
+            InputManager.Instance.OnSwitchGun += InputManager_OnSwitchGun;
+            InputManager.Instance.OnReloadGun += InputManager_OnReloadGun;
+        }
+
+        private void InputManager_OnSwitchGun() => gunSelector.SwitchGunNext();
+
+        private void InputManager_OnReloadGun() => gunSelector.Reload();
 
         private void FixedUpdate()
         {
             Vector3 moveDirection = GetMoveDirectionFromInput();
-            playerMovement.Move(moveDirection);
+            absMovement.Move(moveDirection, playerSO.MoveSpeed);
 
             if (InputManager.Instance.IsShootPressed())
             {
                 Vector3 shootDireciton = GetRotateDirectionFromMouse();
-                playerRotation.Rotate(shootDireciton);
-                playerShoot.Fire(shootDireciton);
+                absMovement.Rotate(shootDireciton);
+                gunSelector.UsingGun(shootDireciton);
             }
             else
             {
-                playerShoot.Fire(Vector3.zero);
-                playerRotation.Rotate(moveDirection);
+                Ray ray = CameraManager.Instance.GetRayFromMousePosition();
+                if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, groundLayerMark))
+                {
+                    gunSelector.UnUsingGun(hitInfo.point);
+                }
+                
+                absMovement.Rotate(moveDirection);
             }
         }
 

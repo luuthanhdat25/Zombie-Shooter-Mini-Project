@@ -12,12 +12,14 @@ namespace Player
             Shoot
         }
 
+        [SerializeField]
+        private CharactorControllerMovement playerMovement;
+
         private int animIDSpeed;
         private int animIDShoot;
 
         private Animator animator;
         private float animationBlend;
-        private PlayerMovement playerMovement;
 
         private bool isShootOn = false;
 
@@ -31,11 +33,6 @@ namespace Player
         {
             animIDSpeed = Animator.StringToHash(AnimatorParameter.Speed.ToString());
             animIDShoot = Animator.StringToHash(AnimatorParameter.Shoot.ToString());
-        }
-
-        private void Start()
-        {
-            playerMovement = PlayerController.Instance.PlayerMovement;
         }
 
         private void LateUpdate()
@@ -58,7 +55,7 @@ namespace Player
 
         private void UpdateAnimationBlend()
         {
-            animationBlend = Mathf.Lerp(animationBlend, playerMovement.CurrentSpeed, Time.deltaTime * playerMovement.SpeedChangeRate);
+            //animationBlend = Mathf.Lerp(animationBlend, playerMovement.CurrentSpeed, Time.deltaTime * playerMovement.SpeedChangeRate);
             if (animationBlend < 0.01f) animationBlend = 0f;
             animator.SetFloat(animIDSpeed, animationBlend);
         }

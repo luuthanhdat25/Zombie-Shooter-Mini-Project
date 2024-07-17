@@ -44,6 +44,24 @@ public partial class @InputSystemSetting: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchGun"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a774037-ba4d-4bee-86e7-2902a797d501"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReloadGun"",
+                    ""type"": ""Button"",
+                    ""id"": ""16c645c2-228e-46e5-82be-1cba2899a627"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -167,6 +185,28 @@ public partial class @InputSystemSetting: IInputActionCollection2, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82ab03fb-9c1b-4e24-910e-e3497db28153"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""SwitchGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b3b3c3f6-80f1-4098-a9a4-dc111df229b2"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ReloadGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -225,6 +265,8 @@ public partial class @InputSystemSetting: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+        m_Player_SwitchGun = m_Player.FindAction("SwitchGun", throwIfNotFound: true);
+        m_Player_ReloadGun = m_Player.FindAction("ReloadGun", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -288,12 +330,16 @@ public partial class @InputSystemSetting: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Shoot;
+    private readonly InputAction m_Player_SwitchGun;
+    private readonly InputAction m_Player_ReloadGun;
     public struct PlayerActions
     {
         private @InputSystemSetting m_Wrapper;
         public PlayerActions(@InputSystemSetting wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+        public InputAction @SwitchGun => m_Wrapper.m_Player_SwitchGun;
+        public InputAction @ReloadGun => m_Wrapper.m_Player_ReloadGun;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -309,6 +355,12 @@ public partial class @InputSystemSetting: IInputActionCollection2, IDisposable
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
+            @SwitchGun.started += instance.OnSwitchGun;
+            @SwitchGun.performed += instance.OnSwitchGun;
+            @SwitchGun.canceled += instance.OnSwitchGun;
+            @ReloadGun.started += instance.OnReloadGun;
+            @ReloadGun.performed += instance.OnReloadGun;
+            @ReloadGun.canceled += instance.OnReloadGun;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -319,6 +371,12 @@ public partial class @InputSystemSetting: IInputActionCollection2, IDisposable
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
+            @SwitchGun.started -= instance.OnSwitchGun;
+            @SwitchGun.performed -= instance.OnSwitchGun;
+            @SwitchGun.canceled -= instance.OnSwitchGun;
+            @ReloadGun.started -= instance.OnReloadGun;
+            @ReloadGun.performed -= instance.OnReloadGun;
+            @ReloadGun.canceled -= instance.OnReloadGun;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -376,5 +434,7 @@ public partial class @InputSystemSetting: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnSwitchGun(InputAction.CallbackContext context);
+        void OnReloadGun(InputAction.CallbackContext context);
     }
 }

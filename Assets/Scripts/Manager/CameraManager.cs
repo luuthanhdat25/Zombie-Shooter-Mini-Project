@@ -27,5 +27,10 @@ namespace Manager
             Vector2 normalizedMousePosition = mousePositionRelativeToCenter / (screenSize / 2.0f);
             return normalizedMousePosition;
         }
+
+        public Ray GetRayFromMousePosition()
+        {
+            return cinemachineBrain.OutputCamera.ScreenPointToRay(InputManager.Instance.GetMousePositionInScreen());
+        }
     }
 }

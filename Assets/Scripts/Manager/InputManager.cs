@@ -7,6 +7,9 @@ namespace Manager
 {
     public class InputManager : Singleton<InputManager>
     {
+        public Action OnSwitchGun;
+        public Action OnReloadGun;
+
         private InputSystemSetting inputSystemSetting;
 
         protected override void Awake()
@@ -19,6 +22,12 @@ namespace Manager
         {
             inputSystemSetting = new InputSystemSetting();
             inputSystemSetting.Enable();
+        }
+
+        private void Start()
+        {
+            inputSystemSetting.Player.SwitchGun.performed += (InputAction.CallbackContext context) => OnSwitchGun?.Invoke();
+            inputSystemSetting.Player.ReloadGun.performed += (InputAction.CallbackContext context) => OnReloadGun?.Invoke();
         }
 
         public Vector2 GetRawInputNormalized()
