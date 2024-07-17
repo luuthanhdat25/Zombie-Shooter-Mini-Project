@@ -18,14 +18,8 @@ namespace AbstractClass
         }
 
         /// <summary>
-        /// Handles collision with a damage sender.
+        /// Called when got hit.
         /// </summary>
-        /// <param name="damageSender">The object that caused the collision.</param>
-        public virtual void Collision(AbsDamageSender damageSender)
-        {
-            if (damageSender == null) return;
-            absController.AbsStat.Deduct(damageSender.GetDamage());
-            damageSender.GotHit();
-        }
+        public abstract void GotHit();
     }
 }

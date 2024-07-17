@@ -13,7 +13,9 @@ public class ParabolicMovement : AbsMovement
     }
 
     public override void Rotate(Vector3 rotateDirection)
-    {}
+    {
+        return;
+    }
 
     private IEnumerator CoroutineMovement(Vector3 start, Vector3 end, float height, float speed)
     {

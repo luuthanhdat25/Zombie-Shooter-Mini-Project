@@ -1,6 +1,7 @@
 using AbstractClass;
+using UnityEngine;
 
-public class NullDamageReciever : AbsDamageReciver
+public class NormalProjectileDamageReciever : AbsDamageReciver
 {
     public override void GotHit()
     {

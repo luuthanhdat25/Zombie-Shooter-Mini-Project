@@ -6,16 +6,9 @@ namespace Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerDamageReciever: AbsDamageReciver 
     {
-        private void OnControllerColliderHit(ControllerColliderHit hit)
+        public override void GotHit()
         {
-            if (hit.collider == null) return;
-            AbsController absControllerHit = hit.gameObject.GetComponent<AbsController>();
-            if(absControllerHit == null) return;
-            
-            AbsDamageSender damageSender = absControllerHit.AbsDamageSender;
-            Collision(damageSender);
-
-            Debug.Log("Hit player");
+            // Play Effect
         }
     }
 }

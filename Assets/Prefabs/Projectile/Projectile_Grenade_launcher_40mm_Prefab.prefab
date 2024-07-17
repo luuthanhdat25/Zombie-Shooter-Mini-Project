@@ -225,12 +225,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1945328245669877334}
-  - component: {fileID: 6513753038293829154}
   - component: {fileID: -1695758766840199468}
-  - component: {fileID: 6483679421382817886}
-  - component: {fileID: 4531219955280609443}
   - component: {fileID: 9146112649448352157}
   - component: {fileID: 7045294986296393226}
+  - component: {fileID: 6513753038293829154}
+  - component: {fileID: 6483679421382817886}
+  - component: {fileID: 4531219955280609443}
   m_Layer: 0
   m_Name: Projectile_Grenade_launcher_40mm_Prefab
   m_TagString: Untagged
@@ -260,26 +260,6 @@ Transform:
   - {fileID: 3904712255108227380}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6513753038293829154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3813438675327580145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2962cd5e1be080e4f8a134bbcdbe0063, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  absGraphic: {fileID: 148922441431162866}
-  absAnimator: {fileID: 8289894600429266362}
-  absMovement: {fileID: 8739114857691448345}
-  absVisionSensor: {fileID: 8811998506851368389}
-  absHearingSensor: {fileID: 1601948342305350190}
-  absStat: {fileID: 6046046644259356399}
-  absDamageReciver: {fileID: 0}
-  absDamageSender: {fileID: 0}
 --- !u!96 &-1695758766840199468
 TrailRenderer:
   serializedVersion: 3
@@ -393,35 +373,6 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!114 &6483679421382817886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3813438675327580145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29cfdac76a4d0d343a8e0cf73ca647a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  absController: {fileID: 6513753038293829154}
-  explosionEffect: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
-    type: 3}
-  radiusExplosion: 4
---- !u!114 &4531219955280609443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3813438675327580145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12d0ca1d3eaa284478e6d2a2c27a2062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
 --- !u!54 &9146112649448352157
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -470,6 +421,56 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.066423014, y: 0.058738902, z: 0.10938752}
   m_Center: {x: -0.00071216375, y: -0.0003868565, z: 0.054209277}
+--- !u!114 &6513753038293829154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3813438675327580145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2962cd5e1be080e4f8a134bbcdbe0063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  absGraphic: {fileID: 148922441431162866}
+  absAnimator: {fileID: 8289894600429266362}
+  absMovement: {fileID: 8739114857691448345}
+  absVisionSensor: {fileID: 8811998506851368389}
+  absHearingSensor: {fileID: 1601948342305350190}
+  absStat: {fileID: 6046046644259356399}
+  absDamageReciver: {fileID: 6483679421382817886}
+  absDamageSender: {fileID: 4531219955280609443}
+--- !u!114 &6483679421382817886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3813438675327580145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cfdac76a4d0d343a8e0cf73ca647a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  absController: {fileID: 6513753038293829154}
+--- !u!114 &4531219955280609443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3813438675327580145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d0ca1d3eaa284478e6d2a2c27a2062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  explosionEffect: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
+    type: 3}
+  radiusExplosion: 4
+  boxCollider: {fileID: 7045294986296393226}
 --- !u!1 &3830725617399334881
 GameObject:
   m_ObjectHideFlags: 0
