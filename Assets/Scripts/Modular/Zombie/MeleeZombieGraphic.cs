@@ -1,9 +1,9 @@
 using AbstractClass;
 using UnityEngine;
 
-namespace Player
+namespace Zombie
 {
-    public class PlayerGraphic : AbsGraphic
+    public class MeleeZombieGraphic : AbsGraphic
     {
         [SerializeField]
         private GameObject hurtModel;
@@ -40,3 +40,4 @@ namespace Player
         }
     }
 }
+

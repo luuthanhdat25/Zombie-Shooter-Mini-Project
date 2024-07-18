@@ -22,7 +22,7 @@ namespace Projectile
             AbsController controller = other.GetComponent<AbsController>();
             if (controller == null) return;
             CollisionWithController(controller);
-            //Play Effect
+            Destroy(gameObject);
         }
     }
 }

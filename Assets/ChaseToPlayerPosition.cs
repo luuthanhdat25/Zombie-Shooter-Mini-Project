@@ -13,12 +13,13 @@ public class ChaseToPlayerPosition : ActionNode
         speed = context.absController.AbsStat.GetMoveSpeed();
         context.absController.AbsMovement.Move(PlayerPublicInfor.Instance.Position, speed);
         delayTimer = 0;
-        Debug.Log("Update Player Position");
+        context.absController.AbsAnimator.SetBool("Running", true);
     }
 
 
     protected override void OnStop()
     {
+        context.absController.AbsAnimator.SetBool("Running", false);
     }
 
     protected override State OnUpdate()
@@ -27,7 +28,6 @@ public class ChaseToPlayerPosition : ActionNode
         if (delayTimer >= delayUpdatePlayerPosition)
         {
             context.absController.AbsMovement.Move(PlayerPublicInfor.Instance.Position, speed);
-            Debug.Log("Update Player Position");
             delayTimer = 0;
         }
 

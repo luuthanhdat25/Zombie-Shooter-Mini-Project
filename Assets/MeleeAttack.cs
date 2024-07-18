@@ -7,17 +7,16 @@ using Player;
 public class MeleeAttack : ActionNode
 {
     public float delayBeforeAttack = 0.5f;
-    //public float distanceAttack = 2f;
-    //public float attackRadius = 2f;
 
     private float delayTimer;
 
     protected override void OnStart() {
         delayTimer = 0;
+        context.absController.AbsAnimator.SetBool("Attack", true);
     }
 
     protected override void OnStop() {
-        
+        context.absController.AbsAnimator.SetBool("Attack", false);
     }
 
     protected override State OnUpdate()

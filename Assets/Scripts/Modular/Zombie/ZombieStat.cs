@@ -15,5 +15,10 @@ public class ZombieStat: AbsStat
         SetDamage(zombieSO.Damage);
     }
 
+    private void Start()
+    {
+        OnDead += () => Destroy(transform.parent.gameObject);
+    }
+
     public override float GetMoveSpeed() => zombieSO.MoveSpeed;
 }
