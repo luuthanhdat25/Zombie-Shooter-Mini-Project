@@ -40,7 +40,7 @@ namespace Gun
                 Debug.LogError(currentGunSO.Prefab.name + " doesn't have controller!");
             }
             projectileController.SetLayerMark(currentProjectileLayerMark);
-            projectileController.AbsDamageSender.SetDamage(currentGunSO.Damage);
+            projectileController.AbsStat.SetDamage(currentGunSO.Damage);
             projectileController.AbsMovement.Move(initalDirection, currentGunSO.ProjectileSO.SpeedMove);
         }
     }

@@ -10,9 +10,6 @@ namespace Player
         [Space]
         [Header("Player Controller")]
         [SerializeField]
-        private PlayerSO playerSO;
-
-        [SerializeField]
         private GunSelector gunSelector;
 
         [SerializeField]
@@ -35,7 +32,7 @@ namespace Player
         private void FixedUpdate()
         {
             Vector3 moveDirection = GetMoveDirectionFromInput();
-            absMovement.Move(moveDirection, playerSO.MoveSpeed);
+            absMovement.Move(moveDirection, absStat.GetMoveSpeed());
 
             if (InputManager.Instance.IsShootPressed())
             {

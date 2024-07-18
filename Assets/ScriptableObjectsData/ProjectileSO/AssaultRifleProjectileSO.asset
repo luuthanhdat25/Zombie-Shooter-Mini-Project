@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8fbee5bb8cc4eb4897c60ca020f904a, type: 3}
-  m_Name: _Player
+  m_Script: {fileID: 11500000, guid: e15a28d565fd47a49a95f49483bb7193, type: 3}
+  m_Name: AssaultRifleProjectileSO
   m_EditorClassIdentifier: 
-  MoveSpeed: 3
+  Prefab: {fileID: 6517766854666655396, guid: 946145a99d829f048a5a9532eb691b8b, type: 3}
+  SpeedMove: 10

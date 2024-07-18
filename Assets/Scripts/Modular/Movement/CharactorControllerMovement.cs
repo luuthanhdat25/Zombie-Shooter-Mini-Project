@@ -60,14 +60,12 @@ namespace Movement
 
         public override void Rotate(Vector3 rotateDirection)
         {
-            if (rotateDirection != Vector3.zero)
-            {
-                targetRotation = Mathf.Atan2(rotateDirection.x, rotateDirection.z) * Mathf.Rad2Deg;
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref rotationVelocity,
-                    rotationSmoothTime);
+            if (rotateDirection == Vector3.zero) return;
+            targetRotation = Mathf.Atan2(rotateDirection.x, rotateDirection.z) * Mathf.Rad2Deg;
+            float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref rotationVelocity,
+                rotationSmoothTime);
 
-                transform.parent.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
-            }
-        }
+            transform.parent.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+    }
     }
 }

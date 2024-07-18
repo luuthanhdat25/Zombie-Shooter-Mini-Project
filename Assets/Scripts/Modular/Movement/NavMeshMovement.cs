@@ -22,7 +22,9 @@ namespace Movement{
 
         public override void Rotate(Vector3 rotateDirection)
         {
-            return;
+            if (rotateDirection == Vector3.zero) return;
+            float targetRotation = Mathf.Atan2(rotateDirection.x, rotateDirection.z) * Mathf.Rad2Deg;
+            transform.parent.rotation = Quaternion.Euler(0.0f, targetRotation, 0.0f);
         }
     }
 }

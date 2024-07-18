@@ -60,14 +60,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: aec8ea649cddfd640b5b0eb66e96497c
-  position: {x: -10.94999, y: 326}
+  position: {x: -9, y: 326}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  speed: 3
   delayUpdatePlayerPosition: 1
-  tolerance: 2
+  tolerance: 1
 --- !u!114 &4532061092176217763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +108,7 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  delayBeforeAttack: 0.5
+  delayBeforeAttack: 0.8
 --- !u!114 &6953881796584304026
 MonoBehaviour:
   m_ObjectHideFlags: 0
