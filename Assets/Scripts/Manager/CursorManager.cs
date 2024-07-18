@@ -1,9 +1,7 @@
 using Enum;
+using Gun;
 using RepeatUtil.DesignPattern.SingletonPattern;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.Jobs;
 using UnityEngine;
 
 namespace Manager
@@ -16,13 +14,10 @@ namespace Manager
         [SerializeField]
         private GunSelector playerGunSelector;
 
-        [SerializeField]
-        private AimShoot playerAimShoot;
-
         private int currentFrame;
         private int frameCount;
-        private float frameTimer;
         private CursorAnimation currentCursorAnimation;
+        private float aimTimer;
 
         protected override void Awake()
         {
@@ -33,6 +28,7 @@ namespace Manager
         private void PlayerGunSelector_OnSwitchGun(object sender, GunSelector.OnSwitchGunEventArgs e)
         {
             int indexCursor = FindIndexCursorByShootType(e.GunSO.ShootType);
+            aimTimer = 0;
             if(indexCursor == -1)
             {
                 Debug.LogError("Doesn't find " + e.GunSO.ShootType.ToString() + " cursor");
@@ -59,7 +55,16 @@ namespace Manager
 
             if(currentCursorAnimation.ShootType == ShootType.AimRelease)
             {
-                currentFrame = Mathf.FloorToInt(playerAimShoot.AimProcessNormalize() * (frameCount - 1));
+                if (!playerGunSelector.IsUnUsingGun)
+                {
+                    aimTimer += Time.deltaTime;
+                }
+                else
+                {
+                    aimTimer = 0;
+                }
+                float processNormalize = Mathf.Clamp01(aimTimer / playerGunSelector.CurrentGunSO().AimDuration);
+                currentFrame = Mathf.FloorToInt(processNormalize * (frameCount - 1));
                 if (currentFrame >= 0 && currentFrame < currentCursorAnimation.TextureArray.Length)
                 {
                     Cursor.SetCursor(currentCursorAnimation.TextureArray[currentFrame], currentCursorAnimation.Offset, CursorMode.Auto);

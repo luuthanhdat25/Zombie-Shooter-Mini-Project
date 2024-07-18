@@ -132,52 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9f000c5a35824449d4f83c361667e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &3731816723618994232
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 18787744291587139}
-  - component: {fileID: 8904912260747210775}
-  m_Layer: 6
-  m_Name: Tag
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &18787744291587139
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3731816723618994232}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8929175262964698816}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8904912260747210775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3731816723618994232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea6bd2a60a9b8e2428db012480c010e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tags: 
-  collisionTags: 
 --- !u!1 &5262283082736948429
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +297,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 579178096461187794}
-  - {fileID: 18787744291587139}
   - {fileID: 576059926680551571}
   - {fileID: 7671771165850235833}
   - {fileID: 7729350711511526681}
@@ -366,7 +319,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   absGraphic: {fileID: 8991685466439345185}
   absAnimator: {fileID: 8811885521741156255}
-  absTag: {fileID: 8904912260747210775}
   absMovement: {fileID: 3061707948364589678}
   absVisionSensor: {fileID: 5454197476040759489}
   absHearingSensor: {fileID: 3135269063828938659}

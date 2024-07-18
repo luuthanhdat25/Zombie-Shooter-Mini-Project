@@ -1,13 +1,8 @@
 using AbstractClass;
-using Enum;
-using Manager;
-using Projectile;
 using ScriptableObjects;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-namespace Player
+namespace Gun
 {
     public class TapHoldShoot : AbsShoot
     {

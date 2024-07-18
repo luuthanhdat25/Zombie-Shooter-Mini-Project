@@ -1,6 +1,6 @@
 using AbstractClass;
+using Gun;
 using Manager;
-using System;
 using UnityEngine;
 
 namespace Player
@@ -46,7 +46,7 @@ namespace Player
             else
             {
                 Ray ray = CameraManager.Instance.GetRayFromMousePosition();
-                if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, groundLayerMark))
+                if (Physics.Raycast(ray, out hitInfo, 100, groundLayerMark))
                 {
                     gunSelector.UnUsingGun(hitInfo.point);
                 }
