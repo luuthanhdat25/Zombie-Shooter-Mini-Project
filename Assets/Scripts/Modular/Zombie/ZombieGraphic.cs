@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Zombie
 {
-    public class MeleeZombieGraphic : AbsGraphic
+    public class ZombieGraphic : AbsGraphic
     {
         [SerializeField]
         private GameObject hurtModel;

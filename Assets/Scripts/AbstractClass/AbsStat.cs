@@ -48,7 +48,6 @@ namespace AbstractClass
             if (IsDead()) return;
 
             this.hpCurrent -= hpDeduct;
-            Debug.Log("Deduct: " + hpDeduct);
             CallOnHealthChangedEvent(hpCurrent);
             this.CheckIsDead();
         }

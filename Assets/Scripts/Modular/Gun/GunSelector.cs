@@ -58,6 +58,7 @@ namespace Gun
         private bool isReloading;
 
         public bool IsUnUsingGun => isUnUsingGun;
+        public void SetInfiniteBullet(bool isTrue) => infiniteBullet = isTrue;
 
         protected override void Awake()
         {
@@ -163,7 +164,7 @@ namespace Gun
             });
         }
 
-        public void UsingGun(Vector3 shootDirection)
+        public void UsingGun(Vector3 shootDirection, bool isDeltaTime)
         {
             if (isReloading) return;
 
@@ -172,7 +173,7 @@ namespace Gun
             int numberOfBullets = GetNumberBulletShoot();
             if (numberOfBullets != 0)
             {
-                if (CurrentAbsShoot().ShootHold(shootDirection, CurrentShootPosition(), numberOfBullets))
+                if (CurrentAbsShoot().ShootHold(shootDirection, CurrentShootPosition(), numberOfBullets, isDeltaTime))
                 {
                     if (!infiniteBullet)
                     {

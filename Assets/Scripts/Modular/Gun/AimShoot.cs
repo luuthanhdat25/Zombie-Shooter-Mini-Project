@@ -15,10 +15,11 @@ namespace Gun
             aimTimer = 0;
         }
 
-        public override bool ShootHold(Vector3 initalDirection, Vector3 initalPosition, int numberOfBullet)
+        public override bool ShootHold(Vector3 initalDirection, Vector3 initalPosition, int numberOfBullet, bool isDeltaTime)
         {
-            firingTimer += Time.fixedDeltaTime;
-            aimTimer += Time.fixedDeltaTime;
+            float deltaTime = isDeltaTime ? Time.deltaTime : Time.fixedDeltaTime;
+            firingTimer += deltaTime;
+            aimTimer += deltaTime;
             return false;
         }
 

@@ -38,7 +38,7 @@ namespace Player
             {
                 Vector3 shootDireciton = GetRotateDirectionFromMouse();
                 absMovement.Rotate(shootDireciton);
-                gunSelector.UsingGun(shootDireciton);
+                gunSelector.UsingGun(shootDireciton, false);
             }
             else
             {

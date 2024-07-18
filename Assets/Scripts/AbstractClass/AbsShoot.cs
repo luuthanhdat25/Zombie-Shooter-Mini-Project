@@ -17,7 +17,7 @@ namespace AbstractClass
         /// <param name="initalPosition">Start position</param>
         /// <param name="numberOfBullet">Number of bullets shoot when shoot</param>
         /// <returns>Return true when shoot successfull</returns>
-        public abstract bool ShootHold(Vector3 initalDirection, Vector3 initalPosition, int numberOfBullet);
+        public abstract bool ShootHold(Vector3 initalDirection, Vector3 initalPosition, int numberOfBullet, bool isDeltaTime);
 
         /// <summary>
         /// Call when release Shoot

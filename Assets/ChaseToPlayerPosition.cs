@@ -16,7 +16,6 @@ public class ChaseToPlayerPosition : ActionNode
         context.absController.AbsAnimator.SetBool("Running", true);
     }
 
-
     protected override void OnStop()
     {
         context.absController.AbsAnimator.SetBool("Running", false);

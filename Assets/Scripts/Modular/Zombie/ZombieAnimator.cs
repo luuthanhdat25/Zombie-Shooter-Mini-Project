@@ -1,11 +1,9 @@
 using AbstractClass;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Zombie
 {
-    public class MeleeZombieAnimator : AbsAnimator
+    public class ZombieAnimator : AbsAnimator
     {
         [SerializeField]
         private Animator animator;

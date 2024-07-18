@@ -1,6 +1,6 @@
 using AbstractClass;
 
-public class MeleeZombieDamageReciever : AbsDamageReciver
+public class ZombieDamageReciever : AbsDamageReciver
 {
     public override void GotHit()
     {

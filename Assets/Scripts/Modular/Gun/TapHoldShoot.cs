@@ -12,9 +12,9 @@ namespace Gun
             firingTimer = 0;
         }
 
-        public override bool ShootHold(Vector3 initalDirection, Vector3 initalPosition, int numberOfBullet)
+        public override bool ShootHold(Vector3 initalDirection, Vector3 initalPosition, int numberOfBullet, bool isDeltaTime)
         {
-            firingTimer += Time.fixedDeltaTime;
+            firingTimer += isDeltaTime? Time.deltaTime: Time.fixedDeltaTime;
 
             if(firingTimer >= FireRateToTimeDelayShoot(currentGunSO.FireRate))
             {
