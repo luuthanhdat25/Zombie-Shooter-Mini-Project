@@ -15,8 +15,14 @@ namespace Key
             if (keyController == null) return;
             KeySO keySO = keyController.CollectKey();
             Add(keySO);
-            UIManager.Instance.KeyCollectedUI.UpdateVisual(keySOList);
+            UIManager.Instance.InPlayingUI.KeyCollectedUI.UpdateVisual(keySOList);
             MessageUI.Instance.ShowMessage("Player get " + keySO.Name, Color.green);
+        }
+
+        public override void RemoveKey(KeySO keySO)
+        {
+            base.RemoveKey(keySO);
+            UIManager.Instance.InPlayingUI.KeyCollectedUI.UpdateVisual(keySOList);
         }
     }
 }

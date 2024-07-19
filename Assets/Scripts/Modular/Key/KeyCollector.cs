@@ -14,7 +14,7 @@ namespace Key
 
         public void Add(KeySO keySO) => keySOList.Add(keySO);
 
-        public void RemoveKey(KeySO keySO)
+        public virtual void RemoveKey(KeySO keySO)
         {
             if (keySOList.Count <= 0) return;
             if (!keySOList.Contains(keySO)) return;

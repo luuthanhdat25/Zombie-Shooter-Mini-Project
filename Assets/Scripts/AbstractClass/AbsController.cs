@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace AbstractClass
 {
+    /// <summary>
+    /// Abstract base class for controller components. Provides a unified interface for managing common game object components.
+    /// </summary>
     public abstract class AbsController : RepeatMonoBehaviour
     {
         [SerializeField]

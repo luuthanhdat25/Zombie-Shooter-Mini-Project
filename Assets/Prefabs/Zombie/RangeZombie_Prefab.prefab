@@ -1046,7 +1046,7 @@ GameObject:
   - component: {fileID: 8521726978115407129}
   - component: {fileID: 5136671662328977688}
   - component: {fileID: 922203855002079552}
-  - component: {fileID: 3233292898617335192}
+  - component: {fileID: 8405989897323314648}
   - component: {fileID: 105505579455803356}
   m_Layer: 7
   m_Name: RangeZombie_Prefab
@@ -1249,12 +1249,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunSOAndComponentList:
   - GunSO: {fileID: 11400000, guid: 6ae16bb1a918c664f90e29036d3d16ea, type: 2}
-    AbsShoot: {fileID: 3233292898617335192}
+    AbsShoot: {fileID: 8405989897323314648}
   gunHoldTransform: {fileID: 8778863498887312614}
   projectileLayerMarkIndex: 9
   holdGunOnStart: 1
   infiniteBullet: 1
---- !u!114 &3233292898617335192
+--- !u!114 &8405989897323314648
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1263,9 +1263,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2977703326643975542}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41fca52ad9ec7ce4f8ec3faf3ddc5323, type: 3}
+  m_Script: {fileID: 11500000, guid: 4bb702f858ca26b43971d72bfcf6ee9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  absController: {fileID: 5528336838971101850}
 --- !u!114 &105505579455803356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1279,6 +1280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keySOList: []
+  isCollectKey: 0
 --- !u!1 &3565096690434459130
 GameObject:
   m_ObjectHideFlags: 0

@@ -62,6 +62,15 @@ public partial class @InputSystemSetting: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""12bf1a72-2b0a-440a-aedd-1736be443769"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,6 +216,17 @@ public partial class @InputSystemSetting: IInputActionCollection2, IDisposable
                     ""action"": ""ReloadGun"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5df535f-079f-4d10-922e-0ddf9b289592"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -267,6 +287,7 @@ public partial class @InputSystemSetting: IInputActionCollection2, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_SwitchGun = m_Player.FindAction("SwitchGun", throwIfNotFound: true);
         m_Player_ReloadGun = m_Player.FindAction("ReloadGun", throwIfNotFound: true);
+        m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -332,6 +353,7 @@ public partial class @InputSystemSetting: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_SwitchGun;
     private readonly InputAction m_Player_ReloadGun;
+    private readonly InputAction m_Player_Escape;
     public struct PlayerActions
     {
         private @InputSystemSetting m_Wrapper;
@@ -340,6 +362,7 @@ public partial class @InputSystemSetting: IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @SwitchGun => m_Wrapper.m_Player_SwitchGun;
         public InputAction @ReloadGun => m_Wrapper.m_Player_ReloadGun;
+        public InputAction @Escape => m_Wrapper.m_Player_Escape;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -361,6 +384,9 @@ public partial class @InputSystemSetting: IInputActionCollection2, IDisposable
             @ReloadGun.started += instance.OnReloadGun;
             @ReloadGun.performed += instance.OnReloadGun;
             @ReloadGun.canceled += instance.OnReloadGun;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -377,6 +403,9 @@ public partial class @InputSystemSetting: IInputActionCollection2, IDisposable
             @ReloadGun.started -= instance.OnReloadGun;
             @ReloadGun.performed -= instance.OnReloadGun;
             @ReloadGun.canceled -= instance.OnReloadGun;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -436,5 +465,6 @@ public partial class @InputSystemSetting: IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnSwitchGun(InputAction.CallbackContext context);
         void OnReloadGun(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

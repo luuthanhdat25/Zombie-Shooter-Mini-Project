@@ -1,4 +1,5 @@
 using AbstractClass;
+using Manager;
 using UnityEngine;
 
 namespace Player
@@ -13,6 +14,11 @@ namespace Player
             base.LoadComponents();
             if (playerSO == null) Debug.Log("Player Stat does't have PlayerSO");
             hpMax = playerSO.Health;
+        }
+
+        private void Start()
+        {
+            OnDead += () => GameManager.Instance.GameOver(false);
         }
 
         public override float GetMoveSpeed() => playerSO.MoveSpeed;

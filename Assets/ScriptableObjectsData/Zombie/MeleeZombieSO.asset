@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ad25bdc4d563041bdffdf3ffc2465c, type: 3}
   m_Name: MeleeZombieSO
   m_EditorClassIdentifier: 
-  Health: 4
+  Health: 6
   Damage: 10
   MoveSpeed: 1.5

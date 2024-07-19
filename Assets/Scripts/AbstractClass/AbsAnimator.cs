@@ -1,8 +1,10 @@
 using RepeatUtil;
-using UnityEngine;
 
 namespace AbstractClass
 {
+    /// <summary>
+    /// Abstract base class for animator components. Provides common animation control methods.
+    /// </summary>
     public abstract class AbsAnimator : RepeatMonoBehaviour
     {
         public virtual void PlayAnimation(string animationName, bool loop)
@@ -24,5 +26,5 @@ namespace AbstractClass
         {
             return 0;
         }
-    } 
+    }
 }

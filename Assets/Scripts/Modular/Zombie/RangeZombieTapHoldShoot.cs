@@ -2,10 +2,20 @@ using AbstractClass;
 using ScriptableObjects;
 using UnityEngine;
 
-namespace Gun
+namespace Zombie
 {
-    public class TapHoldShoot : AbsShoot
+    public class RangeZombieTapHoldShoot : AbsShoot
     {
+        [SerializeField]
+        private AbsController absController;
+
+        protected override void LoadComponents()
+        {
+            base.LoadComponents();
+            LoadComponent(ref absController, gameObject);
+        }
+
+
         public override void ResetShootValue(GunSO gunSO, int projectileLayerMarkIndex)
         {
             base.ResetShootValue(gunSO, projectileLayerMarkIndex);
@@ -14,9 +24,9 @@ namespace Gun
 
         public override bool ShootHold(Vector3 initalDirection, Vector3 initalPosition, int numberOfBullet, bool isDeltaTime)
         {
-            firingTimer += isDeltaTime? Time.deltaTime: Time.fixedDeltaTime;
+            firingTimer += isDeltaTime ? Time.deltaTime : Time.fixedDeltaTime;
 
-            if(firingTimer >= FireRateToTimeDelayShoot(currentGunSO.FireRate))
+            if (firingTimer >= FireRateToTimeDelayShoot(currentGunSO.FireRate))
             {
                 SpawnProjetile(initalDirection, initalPosition);
                 firingTimer = 0;
@@ -34,14 +44,13 @@ namespace Gun
         {
             GameObject newProjectile = Instantiate(currentGunSO.ProjectileSO.Prefab, initalPosition, Quaternion.identity);
             AbsController projectileController = newProjectile.GetComponent<AbsController>();
-            if(projectileController == null)
+            if (projectileController == null)
             {
                 Debug.LogError(currentGunSO.Prefab.name + " doesn't have controller!");
             }
             projectileController.SetLayerMark(currentProjectileLayerMark);
-            projectileController.AbsStat.SetDamage(currentGunSO.Damage);
+            projectileController.AbsStat.SetDamage(absController.AbsStat.GetDamage());
             projectileController.AbsMovement.Move(initalDirection, currentGunSO.ProjectileSO.SpeedMove);
         }
     }
 }
-

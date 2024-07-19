@@ -1,5 +1,6 @@
 using RepeatUtil.DesignPattern.SingletonPattern;
 using System;
+using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,15 +23,13 @@ namespace Manager
             GamePaused
         }
 
-        [SerializeField]
-        private LevelContextSO levelContextSO;
-
         private GameState state;
 
         protected override void Awake()
         {
             base.Awake();
             state = GameState.GamePlaying;
+            Time.timeScale = 1;
         }
 
         public void TogglePauseGame()
@@ -57,7 +56,7 @@ namespace Manager
             }
         }
 
-        public void ChangeState(GameState newState)
+        private void ChangeState(GameState newState)
         {
             state = newState;
             OnStateChanged?.Invoke(this, new OnStateChangedEventArgs
@@ -67,6 +66,13 @@ namespace Manager
         }
      
         public bool IsGamePlaying() => state == GameState.GamePlaying;
+
+        public void GameOver(bool isWin)
+        {
+            UIManager.Instance.GameOverUI.Show(isWin);
+            ChangeState(GameState.GameOver);
+            Time.timeScale = 0;
+        }
     
         public void PlayAgain() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

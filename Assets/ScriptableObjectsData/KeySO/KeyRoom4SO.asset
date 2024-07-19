@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8fbee5bb8cc4eb4897c60ca020f904a, type: 3}
-  m_Name: PlayerSO
+  m_Script: {fileID: 11500000, guid: 126098d568233be44a1f7997d4fe3a44, type: 3}
+  m_Name: KeyRoom4SO
   m_EditorClassIdentifier: 
-  Health: 100
-  MoveSpeed: 4
+  Name: Key Room 4
+  KeyIconSprite: {fileID: 21300000, guid: 37e71e0770bd02f4e82088a58c767623, type: 3}
+  Prefab: {fileID: 5205406576807435753, guid: 809540306a5620645ba44339497afe3b, type: 3}
