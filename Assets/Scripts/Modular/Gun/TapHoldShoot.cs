@@ -1,13 +1,8 @@
 using AbstractClass;
-using Enum;
-using Manager;
-using Projectile;
 using ScriptableObjects;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-namespace Player
+namespace Gun
 {
     public class TapHoldShoot : AbsShoot
     {
@@ -17,9 +12,9 @@ namespace Player
             firingTimer = 0;
         }
 
-        public override bool ShootHold(Vector3 initalDirection, Vector3 initalPosition, int numberOfBullet)
+        public override bool ShootHold(Vector3 initalDirection, Vector3 initalPosition, int numberOfBullet, bool isDeltaTime)
         {
-            firingTimer += Time.fixedDeltaTime;
+            firingTimer += isDeltaTime? Time.deltaTime: Time.fixedDeltaTime;
 
             if(firingTimer >= FireRateToTimeDelayShoot(currentGunSO.FireRate))
             {
@@ -45,7 +40,7 @@ namespace Player
                 Debug.LogError(currentGunSO.Prefab.name + " doesn't have controller!");
             }
             projectileController.SetLayerMark(currentProjectileLayerMark);
-            projectileController.AbsDamageSender.SetDamage(currentGunSO.Damage);
+            projectileController.AbsStat.SetDamage(currentGunSO.Damage);
             projectileController.AbsMovement.Move(initalDirection, currentGunSO.ProjectileSO.SpeedMove);
         }
     }

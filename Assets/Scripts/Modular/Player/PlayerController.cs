@@ -1,6 +1,6 @@
 using AbstractClass;
+using Gun;
 using Manager;
-using System;
 using UnityEngine;
 
 namespace Player
@@ -9,9 +9,6 @@ namespace Player
     {
         [Space]
         [Header("Player Controller")]
-        [SerializeField]
-        private PlayerSO playerSO;
-
         [SerializeField]
         private GunSelector gunSelector;
 
@@ -35,18 +32,18 @@ namespace Player
         private void FixedUpdate()
         {
             Vector3 moveDirection = GetMoveDirectionFromInput();
-            absMovement.Move(moveDirection, playerSO.MoveSpeed);
+            absMovement.Move(moveDirection, absStat.GetMoveSpeed());
 
             if (InputManager.Instance.IsShootPressed())
             {
                 Vector3 shootDireciton = GetRotateDirectionFromMouse();
                 absMovement.Rotate(shootDireciton);
-                gunSelector.UsingGun(shootDireciton);
+                gunSelector.UsingGun(shootDireciton, false);
             }
             else
             {
                 Ray ray = CameraManager.Instance.GetRayFromMousePosition();
-                if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, groundLayerMark))
+                if (Physics.Raycast(ray, out hitInfo, 100, groundLayerMark))
                 {
                     gunSelector.UnUsingGun(hitInfo.point);
                 }

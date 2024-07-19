@@ -18,8 +18,8 @@ MonoBehaviour:
   ProjectileSO: {fileID: 11400000, guid: e2ac813ef560f2c48810120b94895d10, type: 2}
   GunType: 0
   ShootType: 0
-  FireRate: 5
-  Damage: 0
+  FireRate: 3
+  Damage: 1
   ReloadDuration: 2
   AimDuration: 2
   NumberBulletShootOneTime: 1

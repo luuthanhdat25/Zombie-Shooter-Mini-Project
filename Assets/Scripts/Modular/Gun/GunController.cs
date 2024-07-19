@@ -2,60 +2,64 @@ using AbstractClass;
 using ScriptableObjects;
 using UnityEngine;
 
-public class GunController : AbsController
+namespace Gun
 {
-    [Header("Gun Controller")]
-    [SerializeField]
-    private Transform shootingPoint;
-
-    [SerializeField]
-    private GunSO gunSO;
-
-    private int currentBullet;
-    private int totalBullet;
-
-    public int CurrentBullet => currentBullet;
-    public int TotalBullet => totalBullet;
-
-    protected override void Awake()
+    public class GunController : AbsController
     {
-        base.Awake();
-        if (gunSO == null) Debug.LogError($"{gameObject.name} doesn't have GunSO");
-        totalBullet = gunSO.NumberBulletMax;
-        currentBullet = gunSO.NumberBulletReload;
-    }
+        [Header("Gun Controller")]
+        [SerializeField]
+        private Transform shootingPoint;
 
-    public int GetBulletCanUse()
-    {
-        return currentBullet < gunSO.NumberBulletShootOneTime ? currentBullet : gunSO.NumberBulletShootOneTime;
-    }
+        [SerializeField]
+        private GunSO gunSO;
 
-    public bool CanReload() => totalBullet > 0;
+        private int currentBullet;
+        private int totalBullet;
 
-    public void Reload()
-    {
-        if(!CanReload()) return;
-        Debug.Log("Reload");
-        int neededBullets = gunSO.NumberBulletReload - currentBullet;
-        int numberBulletsReload = Mathf.Min(neededBullets, totalBullet);
+        public int CurrentBullet => currentBullet;
+        public int TotalBullet => totalBullet;
 
-        currentBullet += numberBulletsReload;
-        totalBullet -= numberBulletsReload;
-    }
-
-    public void DeductCurrentBullet(int valueDeduct)
-    {
-        if(currentBullet >= valueDeduct)
+        protected override void Awake()
         {
-            currentBullet -= valueDeduct;
+            base.Awake();
+            if (gunSO == null) Debug.LogError($"{gameObject.name} doesn't have GunSO");
+            totalBullet = gunSO.NumberBulletMax;
+            currentBullet = gunSO.NumberBulletReload;
         }
-        else
-        {
-            currentBullet = 0;
-        }
-    }
 
-    public bool IsOutOfBullet() => currentBullet <= 0 && totalBullet <= 0;
+        public int GetBulletCanUse()
+        {
+            return currentBullet < gunSO.NumberBulletShootOneTime ? currentBullet : gunSO.NumberBulletShootOneTime;
+        }
+
+        public bool CanReload() => totalBullet > 0;
+
+        public void Reload()
+        {
+            if(!CanReload()) return;
+            int neededBullets = gunSO.NumberBulletReload - currentBullet;
+            int numberBulletsReload = Mathf.Min(neededBullets, totalBullet);
+
+            currentBullet += numberBulletsReload;
+            totalBullet -= numberBulletsReload;
+        }
+
+        public void DeductCurrentBullet(int valueDeduct)
+        {
+            if(currentBullet >= valueDeduct)
+            {
+                currentBullet -= valueDeduct;
+            }
+            else
+            {
+                currentBullet = 0;
+            }
+        }
+
+        public bool IsFullCurrentBullet() => currentBullet == gunSO.NumberBulletReload;
+
+        public bool IsOutOfBullet() => currentBullet <= 0 && totalBullet <= 0;
     
-    public Vector3 ShootingPoition() => shootingPoint.position;
+        public Vector3 ShootingPoition() => shootingPoint.position;
+    }
 }

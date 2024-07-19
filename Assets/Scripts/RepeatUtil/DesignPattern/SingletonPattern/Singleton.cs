@@ -33,24 +33,5 @@ namespace RepeatUtil.DesignPattern.SingletonPattern
             instance = gameObject.AddComponent<T>();
             return instance;
         }
-
-        /// <summary>
-        /// Overrides the Awake method to ensure there is only one instance of the Singleton.
-        /// </summary>
-        protected override void Awake()
-        {
-            RemoveDuplicates();
-            base.Awake();
-        }
-        
-        protected virtual void RemoveDuplicates()
-        {
-            if(instance != null) 
-            { 
-                Destroy(gameObject); 
-                return; 
-            }
-            instance = this as T;
-        }
     }
 }

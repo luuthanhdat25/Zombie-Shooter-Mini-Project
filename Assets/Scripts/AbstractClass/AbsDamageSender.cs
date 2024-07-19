@@ -1,4 +1,5 @@
 using RepeatUtil;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AbstractClass
@@ -9,11 +10,13 @@ namespace AbstractClass
     public abstract class AbsDamageSender : RepeatMonoBehaviour
     {
         [SerializeField]
-        protected int damage;
+        protected AbsController controller;
 
-        public virtual int GetDamage() => damage;
-
-        public void SetDamage(int newValue) => damage = newValue;
+        protected override void LoadComponents()
+        {
+            base.LoadComponents();
+            LoadComponent<AbsController>(ref controller, gameObject);
+        }
 
         /// <summary>
         /// Handles collision with a damage sender.
@@ -22,8 +25,11 @@ namespace AbstractClass
         public virtual void CollisionWithController(AbsController absController)
         {
             if (absController == null) return;
-            absController.AbsStat.Deduct(GetDamage());
+            Debug.Log("Deduct: " + controller.AbsStat.GetDamage());
+            absController.AbsStat.Deduct(controller.AbsStat.GetDamage());
             absController.AbsDamageReciver.GotHit();
         }
+
+        public virtual List<AbsController> CheckCollision() => null;
     }
 }

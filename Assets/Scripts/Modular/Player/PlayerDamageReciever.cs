@@ -8,7 +8,7 @@ namespace Player
     {
         public override void GotHit()
         {
-            // Play Effect
+            absController.AbsGraphic.ActiveHurtEffect();
         }
     }
 }

@@ -7,15 +7,18 @@ namespace AbstractClass
     public abstract class AbsStat : RepeatMonoBehaviour
     {
         public Action OnDead;
+        public EventHandler<OnHealthChangedEventArgs> OnHealthChanged;
 
-        [SerializeField] 
-        protected int hpMax = 5;
+        public class OnHealthChangedEventArgs : EventArgs
+        {
+            public int HealthUpdated;
+        }
 
+        protected int hpMax;
         protected bool isDead = false;
         protected int hpCurrent;
-
-        public int CurrentHp => this.hpCurrent;
-        public int HpMax => this.hpMax;
+        protected int damage;
+        
 
         private void OnEnable() => Reborn();
 
@@ -23,6 +26,12 @@ namespace AbstractClass
         {
             this.hpCurrent = this.hpMax;
             this.isDead = false;
+            CallOnHealthChangedEvent(hpCurrent);
+        }
+
+        public void CallOnHealthChangedEvent(int healthUpdated)
+        {
+            OnHealthChanged?.Invoke(this, new OnHealthChangedEventArgs { HealthUpdated = healthUpdated });
         }
 
         public virtual void Add(int hpAdd)
@@ -31,6 +40,7 @@ namespace AbstractClass
             if (this.hpCurrent >= this.hpMax) return;
 
             this.hpCurrent += hpAdd;
+            CallOnHealthChangedEvent(hpCurrent);
         }
 
         public virtual void Deduct(int hpDeduct)
@@ -38,6 +48,7 @@ namespace AbstractClass
             if (IsDead()) return;
 
             this.hpCurrent -= hpDeduct;
+            CallOnHealthChangedEvent(hpCurrent);
             this.CheckIsDead();
         }
 
@@ -49,5 +60,14 @@ namespace AbstractClass
             this.isDead = true;
             OnDead?.Invoke();
         }
+
+        public int GetCurrentHp() => this.hpCurrent;
+        public int GetHpMax() => this.hpMax;
+
+        public virtual float GetMoveSpeed() => 0f;
+
+        public virtual int GetDamage() => damage;
+
+        public virtual void SetDamage(int value) => damage = value;
     }
 }

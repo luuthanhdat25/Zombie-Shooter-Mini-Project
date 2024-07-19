@@ -1,136 +1,105 @@
 using AbstractClass;
-using Enum;
-using Player;
 using RepeatUtil;
 using ScriptableObjects;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunSelector : RepeatMonoBehaviour
+namespace Gun
 {
-    public EventHandler<OnSwitchGunEventArgs> OnSwitchGun;
-    public EventHandler<OnReloadEventArgs> OnUpdatedReloadTimer;
-    public EventHandler<OnUpdatedBulletEventArgs> OnUpdatedBullet;
-
-    public class OnSwitchGunEventArgs : EventArgs
+    public class GunSelector : RepeatMonoBehaviour
     {
-        public GunSO GunSO;
-    }
+        public EventHandler<OnSwitchGunEventArgs> OnSwitchGun;
+        public EventHandler<OnReloadEventArgs> OnUpdatedReloadTimer;
+        public EventHandler<OnUpdatedBulletEventArgs> OnUpdatedBullet;
 
-    public class OnReloadEventArgs : EventArgs
-    {
-        public float ReloadtimerNormalize;
-    }
-
-    public class OnUpdatedBulletEventArgs : EventArgs
-    {
-        public float CurrentBullet;
-        public float TotalBullet;
-    }
-
-    [SerializeField]
-    private List<GunSO> gunSOList;
-
-    [SerializeField]
-    private Transform gunHoldTransform;
-
-    [SerializeField]
-    private bool holdGunOnStart;
-
-    [SerializeField]
-    private int projectileLayerMarkIndex;
-
-    private List<GunController> gunControllerList;
-    private int indexSelectGun;
-    private Dictionary<ShootType, AbsShoot> shootTypeDictionary;
-    private bool isUnUsingGun = true;
-    private float reloadTimer;
-    private bool isReloading;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (gunSOList.Count == 0) Debug.LogError("Player doen't have any Gun!");
-        
-        TapHoldShoot tapHoldShoot = GetComponent<TapHoldShoot> ();
-        AimShoot aimShoot = GetComponent<AimShoot>();
-        if(tapHoldShoot == null || aimShoot == null)
+        public class OnSwitchGunEventArgs : EventArgs
         {
-            Debug.LogError("Some Shoot component null");
-        }
-        shootTypeDictionary = new()
-        {
-            { ShootType.TapHold,  tapHoldShoot},
-            { ShootType.AimRelease, aimShoot}
-        };
-    }
-
-    private void Start()
-    {
-        gunControllerList = new();
-        foreach (var gunSO in gunSOList)
-        {
-            GameObject gun = Instantiate(gunSO.Prefab, gunHoldTransform.position, Quaternion.identity);
-            gun.transform.parent = gunHoldTransform;
-            GunController gunController = gun.GetComponent<GunController>();
-            gunControllerList.Add(gunController);
+            public GunSO GunSO;
         }
 
-        if (holdGunOnStart) ActiveGun(0);
-    }
-
-    private void ActiveGun(int indexSelectGun)
-    {
-        if (indexSelectGun < 0 || indexSelectGun >= gunSOList.Count) return;
-
-        gunControllerList.ForEach(gunController => gunController.gameObject.SetActive(false));
-        gunControllerList[indexSelectGun].gameObject.SetActive(true);
-        
-        shootTypeDictionary[gunSOList[indexSelectGun].ShootType].ResetShootValue(gunSOList[indexSelectGun], projectileLayerMarkIndex);
-        OnSwitchGun?.Invoke(this, new OnSwitchGunEventArgs
+        public class OnReloadEventArgs : EventArgs
         {
-            GunSO = gunSOList[indexSelectGun]
-        });
-        OnUpdatedBullet?.Invoke(this, new OnUpdatedBulletEventArgs
-        {
-            CurrentBullet = CurrentGunController().CurrentBullet,
-            TotalBullet = CurrentGunController().TotalBullet
-        });
-    }
-
-    public void SwitchGunNext()
-    {
-        if (gunSOList.Count <= 1) return;
-        indexSelectGun++;
-        indexSelectGun = indexSelectGun >= gunSOList.Count ? 0 : indexSelectGun;
-        
-        ActiveGun(indexSelectGun);
-        isReloading = false;
-        reloadTimer = 0;
-
-        if (!CurrentGunController().IsOutOfBullet() && CurrentGunController().CurrentBullet == 0)
-        {
-            Reload();
+            public float ReloadtimerNormalize;
         }
-        OnUpdatedReloadTimer?.Invoke(this, new OnReloadEventArgs
+
+        public class OnUpdatedBulletEventArgs : EventArgs
         {
-            ReloadtimerNormalize = 0
-        });
-    }
+            public float CurrentBullet;
+            public float TotalBullet;
+        }
 
-    private void FixedUpdate() => HandleReload();
-
-    private void HandleReload()
-    {
-        if (!isReloading) return;
-
-        reloadTimer += Time.fixedDeltaTime;
-        if (reloadTimer >= CurrentGunSO().ReloadDuration)
+        [System.Serializable]
+        public class GunSOAndShootComponent
         {
-            isReloading = false;
-            reloadTimer = 0;
-            CurrentGunController().Reload();
+            public GunSO GunSO;
+            public AbsShoot AbsShoot;
+        }
+
+        [SerializeField]
+        private List<GunSOAndShootComponent> gunSOAndComponentList;
+
+        [SerializeField]
+        private Transform gunHoldTransform;
+
+        [SerializeField]
+        private int projectileLayerMarkIndex;
+
+        [SerializeField]
+        private bool holdGunOnStart;
+
+        [SerializeField]
+        private bool infiniteBullet;
+
+        private List<GunController> gunControllerList;
+        private int indexSelectGun;
+        private bool isUnUsingGun = true;
+        private float reloadTimer;
+        private bool isReloading;
+
+        public bool IsUnUsingGun => isUnUsingGun;
+        public void SetInfiniteBullet(bool isTrue) => infiniteBullet = isTrue;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            foreach (var item in gunSOAndComponentList)
+            {
+                LoadComponent(ref item.AbsShoot, gameObject);
+            }
+        }
+
+        private void Start()
+        {
+            InitializeGunControllers();
+            if (holdGunOnStart) ActiveGun(0);
+        }
+
+        private void InitializeGunControllers()
+        {
+            gunControllerList = new();
+            foreach (var item in gunSOAndComponentList)
+            {
+                GameObject gun = Instantiate(item.GunSO.Prefab, gunHoldTransform.position, Quaternion.identity);
+                gun.transform.parent = gunHoldTransform;
+                GunController gunController = gun.GetComponent<GunController>();
+                gunControllerList.Add(gunController);
+            }
+        }
+
+        private void ActiveGun(int indexSelectGun)
+        {
+            if (indexSelectGun < 0 || indexSelectGun >= gunSOAndComponentList.Count) return;
+
+            gunControllerList.ForEach(gunController => gunController.gameObject.SetActive(false));
+            gunControllerList[indexSelectGun].gameObject.SetActive(true);
+
+            gunSOAndComponentList[indexSelectGun].AbsShoot.ResetShootValue(gunSOAndComponentList[indexSelectGun].GunSO, projectileLayerMarkIndex);
+        
+            OnSwitchGun?.Invoke(this, new OnSwitchGunEventArgs
+            {
+                GunSO = gunSOAndComponentList[indexSelectGun].GunSO
+            });
             OnUpdatedBullet?.Invoke(this, new OnUpdatedBulletEventArgs
             {
                 CurrentBullet = CurrentGunController().CurrentBullet,
@@ -138,87 +107,140 @@ public class GunSelector : RepeatMonoBehaviour
             });
         }
 
-        OnUpdatedReloadTimer?.Invoke(this, new OnReloadEventArgs
+        public void SwitchGunNext()
         {
-            ReloadtimerNormalize = reloadTimer / CurrentGunSO().ReloadDuration
-        });
-    }
+            if (gunSOAndComponentList.Count <= 1) return;
 
-    public void UsingGun(Vector3 shootDirection)
-    {
-        if (isReloading) return;
+            indexSelectGun = (indexSelectGun + 1) % gunSOAndComponentList.Count;
+            ActiveGun(indexSelectGun);
 
-        isUnUsingGun = false;
-        if (CurrentGunController().IsOutOfBullet()) return;
+            isReloading = false;
+            reloadTimer = 0;
 
-        int numberOfBullet = CurrentGunController().GetBulletCanUse();
-        if(numberOfBullet != 0)
-        {
-            if(CurrentAbsShoot().ShootHold(shootDirection, CurrentShootPosition(), numberOfBullet))
+            if (!CurrentGunController().IsOutOfBullet() && CurrentGunController().CurrentBullet == 0)
             {
-                CurrentGunController().DeductCurrentBullet(numberOfBullet);
-                if (!CurrentGunController().IsOutOfBullet() && CurrentGunController().CurrentBullet == 0)
-                {
-                    Reload();
-                }
+                Reload();
+            }
+            OnUpdatedReloadTimer?.Invoke(this, new OnReloadEventArgs
+            {
+                ReloadtimerNormalize = 0
+            });
+        }
+
+        public bool Reload()
+        {
+            if (CurrentGunController().IsFullCurrentBullet() || infiniteBullet || isReloading) return false;
+            isReloading = true;
+            reloadTimer = 0;
+            OnUpdatedReloadTimer?.Invoke(this, new OnReloadEventArgs
+            {
+                ReloadtimerNormalize = 0
+            });
+            return true;
+        }
+
+        private void FixedUpdate() => HandleReload();
+
+        private void HandleReload()
+        {
+            if (!isReloading) return;
+
+            reloadTimer += Time.fixedDeltaTime;
+            if (reloadTimer >= CurrentGunSO().ReloadDuration)
+            {
+                isReloading = false;
+                reloadTimer = 0;
+                CurrentGunController().Reload();
                 OnUpdatedBullet?.Invoke(this, new OnUpdatedBulletEventArgs
                 {
                     CurrentBullet = CurrentGunController().CurrentBullet,
                     TotalBullet = CurrentGunController().TotalBullet
                 });
             }
-        }
-        else
-        {
-            Reload();
-        }
-    }
 
-    public void Reload()
-    {
-        isReloading = true;
-        reloadTimer = 0;
-        OnUpdatedReloadTimer?.Invoke(this, new OnReloadEventArgs
-        {
-            ReloadtimerNormalize = 0
-        });
-    }
-
-    public void UnUsingGun(Vector3 releasePosition)
-    {
-        if (isReloading) return;
-        if (isUnUsingGun) return;
-
-        isUnUsingGun = true;
-        if (CurrentGunController().IsOutOfBullet()) return;
-
-
-        int numberOfBullet = CurrentGunController().GetBulletCanUse();
-        if (numberOfBullet != 0)
-        {
-            if (CurrentAbsShoot().ShootRelease(releasePosition, CurrentShootPosition(), numberOfBullet))
+            OnUpdatedReloadTimer?.Invoke(this, new OnReloadEventArgs
             {
-                CurrentGunController().DeductCurrentBullet(numberOfBullet);
-                if (!CurrentGunController().IsOutOfBullet() && CurrentGunController().CurrentBullet == 0)
+                ReloadtimerNormalize = reloadTimer / CurrentGunSO().ReloadDuration
+            });
+        }
+
+        public void UsingGun(Vector3 shootDirection, bool isDeltaTime)
+        {
+            if (isReloading) return;
+
+            isUnUsingGun = false;
+            if (CurrentGunController().IsOutOfBullet() && !infiniteBullet) return;
+            int numberOfBullets = GetNumberBulletShoot();
+            if (numberOfBullets != 0)
+            {
+                if (CurrentAbsShoot().ShootHold(shootDirection, CurrentShootPosition(), numberOfBullets, isDeltaTime))
                 {
-                    Reload();
+                    if (!infiniteBullet)
+                    {
+                        CurrentGunController().DeductCurrentBullet(numberOfBullets);
+                    }
+                    if (!CurrentGunController().IsOutOfBullet() && CurrentGunController().CurrentBullet == 0)
+                    {
+                        Reload();
+                    }
+                    OnUpdatedBullet?.Invoke(this, new OnUpdatedBulletEventArgs
+                    {
+                        CurrentBullet = CurrentGunController().CurrentBullet,
+                        TotalBullet = CurrentGunController().TotalBullet
+                    });
                 }
-                OnUpdatedBullet?.Invoke(this, new OnUpdatedBulletEventArgs
-                {
-                    CurrentBullet = CurrentGunController().CurrentBullet,
-                    TotalBullet = CurrentGunController().TotalBullet
-                });
+            }
+            else
+            {
+                Reload();
             }
         }
-        else
+
+        private int GetNumberBulletShoot()
         {
-            Reload();
+            return infiniteBullet ? CurrentGunSO().NumberBulletShootOneTime : CurrentGunController().GetBulletCanUse();
         }
+
+        public void UnUsingGun(Vector3 releasePosition)
+        {
+            if (isReloading) return;
+            if (isUnUsingGun) return;
+
+            isUnUsingGun = true;
+            if (CurrentGunController().IsOutOfBullet() && !infiniteBullet) return;
+
+            int numberOfBullets = GetNumberBulletShoot();
+            if (numberOfBullets != 0)
+            {
+                if (CurrentAbsShoot().ShootRelease(releasePosition, CurrentShootPosition(), numberOfBullets))
+                {
+                    if (!infiniteBullet)
+                    {
+                        CurrentGunController().DeductCurrentBullet(numberOfBullets);
+                    }
+                    if (!CurrentGunController().IsOutOfBullet() && CurrentGunController().CurrentBullet == 0)
+                    {
+                        Reload();
+                    }
+                    OnUpdatedBullet?.Invoke(this, new OnUpdatedBulletEventArgs
+                    {
+                        CurrentBullet = CurrentGunController().CurrentBullet,
+                        TotalBullet = CurrentGunController().TotalBullet
+                    });
+                }
+            }
+            else
+            {
+                Reload();
+            }
+        }
+
+        public GunSO CurrentGunSO() => gunSOAndComponentList[indexSelectGun].GunSO;
+
+        private GunController CurrentGunController() => gunControllerList[indexSelectGun];
+
+        private AbsShoot CurrentAbsShoot() => gunSOAndComponentList[indexSelectGun].AbsShoot;
+
+        private Vector3 CurrentShootPosition() => gunControllerList[indexSelectGun].ShootingPoition();
     }
-
-
-    private GunSO CurrentGunSO() => gunSOList[indexSelectGun];
-    private GunController CurrentGunController() => gunControllerList[indexSelectGun];
-    private AbsShoot CurrentAbsShoot() => shootTypeDictionary[gunSOList[indexSelectGun].ShootType];
-    private Vector3 CurrentShootPosition() => gunControllerList[indexSelectGun].ShootingPoition();
 }
