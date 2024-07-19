@@ -1114,6 +1114,7 @@ GameObject:
   - component: {fileID: 6276426775484578910}
   - component: {fileID: 1842805455331136589}
   - component: {fileID: 5688803607876998641}
+  - component: {fileID: 7052674366930517009}
   m_Layer: 7
   m_Name: MeleeZombie_Prefab
   m_TagString: Untagged
@@ -1212,8 +1213,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1246,7 +1247,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4954670965896334616}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58c6f9b140a52a14881ec09eaebb66eb, type: 3}
   m_Name: 
@@ -1265,13 +1266,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   absGraphic: {fileID: 6507145743883226626}
-  absAnimator: {fileID: 0}
+  absAnimator: {fileID: 6577860929201784768}
   absMovement: {fileID: 6971331413717964749}
   absVisionSensor: {fileID: 3424479230129304556}
   absHearingSensor: {fileID: 8525025348628471366}
   absStat: {fileID: 5136294368948379947}
   absDamageReciver: {fileID: 5688803607876998641}
   absDamageSender: {fileID: 1842805455331136589}
+  behaviourTreeRunner: {fileID: 7408584417748959275}
+  keyCollector: {fileID: 7052674366930517009}
 --- !u!114 &1842805455331136589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1301,6 +1304,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   absController: {fileID: 6276426775484578910}
+--- !u!114 &7052674366930517009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4954670965896334616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1442ffb24d3500e46bc42a3029e6e677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keySOList: []
 --- !u!1 &5254726650380903624
 GameObject:
   m_ObjectHideFlags: 0

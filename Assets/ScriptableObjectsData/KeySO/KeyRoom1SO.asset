@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85ad25bdc4d563041bdffdf3ffc2465c, type: 3}
-  m_Name: MeleeZombieSO
+  m_Script: {fileID: 11500000, guid: 126098d568233be44a1f7997d4fe3a44, type: 3}
+  m_Name: KeyRoom1SO
   m_EditorClassIdentifier: 
-  Health: 4
-  Damage: 10
-  MoveSpeed: 1.5
+  Name: Key Room 1
+  KeyIconSprite: {fileID: 21300000, guid: 725e30d10185f584d9858777da08e62b, type: 3}
+  Prefab: {fileID: 5205406576807435753, guid: 4133dbc12576057438d7276e589b77c8, type: 3}

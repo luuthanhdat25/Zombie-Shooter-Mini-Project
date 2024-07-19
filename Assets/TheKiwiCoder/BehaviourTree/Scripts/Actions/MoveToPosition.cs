@@ -3,6 +3,7 @@ using TheKiwiCoder;
 public class MoveToPosition : ActionNode
 {
     protected override void OnStart() {
+        context.absController.AbsMovement.ResetMovement();
         context.absController.AbsMovement.Move(blackboard.moveToPosition, context.absController.AbsStat.GetMoveSpeed());
         context.absController.AbsAnimator.SetBool("Running", true);
     }

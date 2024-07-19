@@ -4,7 +4,7 @@ using Player;
 
 public class ChaseToPlayerPosition : ActionNode
 {
-    public float delayUpdatePlayerPosition = 1f;
+    public float delayUpdatePlayerPosition = 1.5f;
     private float delayTimer;
     private float speed;
 
@@ -26,6 +26,7 @@ public class ChaseToPlayerPosition : ActionNode
         delayTimer += Time.deltaTime;
         if (delayTimer >= delayUpdatePlayerPosition)
         {
+            context.absController.AbsMovement.ResetMovement();
             context.absController.AbsMovement.Move(PlayerPublicInfor.Instance.Position, speed);
             delayTimer = 0;
         }

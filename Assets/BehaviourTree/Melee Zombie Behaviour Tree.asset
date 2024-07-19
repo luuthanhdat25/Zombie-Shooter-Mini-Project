@@ -65,7 +65,7 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  delayUpdatePlayerPosition: 1
+  delayUpdatePlayerPosition: 1.5
 --- !u!114 &4532061092176217763
 MonoBehaviour:
   m_ObjectHideFlags: 0

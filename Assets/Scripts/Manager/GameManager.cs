@@ -2,6 +2,7 @@ using RepeatUtil.DesignPattern.SingletonPattern;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 namespace Manager 
 {
     public class GameManager : Singleton<GameManager>

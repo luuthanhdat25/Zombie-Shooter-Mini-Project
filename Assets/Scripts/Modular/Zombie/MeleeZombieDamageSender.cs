@@ -33,7 +33,8 @@ namespace Zombie
             return Physics.OverlapSphere(sphereCastOrigin, attackRadius, playerLayerMask);
         }
 
-        private void OnDrawGizmos()
+
+        private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
             Vector3 sphereCastOrigin = transform.position + new Vector3(0, capsuleHeight / 2, 0f) + transform.forward * attackDistance;

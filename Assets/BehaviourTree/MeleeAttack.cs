@@ -12,6 +12,9 @@ public class MeleeAttack : ActionNode
 
     protected override void OnStart() {
         delayTimer = 0;
+        Vector3 playerPosition = PlayerPublicInfor.Instance.Position;
+        Vector3 rotateDirection = (playerPosition - context.absController.transform.position).normalized;
+        context.absController.AbsMovement.Rotate(rotateDirection);
         context.absController.AbsAnimator.SetBool("Attack", true);
     }
 
@@ -25,10 +28,6 @@ public class MeleeAttack : ActionNode
 
         if (delayTimer >= delayBeforeAttack)
         {
-            Vector3 playerPosition = PlayerPublicInfor.Instance.Position;
-            Vector3 rotateDirection = (playerPosition - context.absController.transform.position).normalized;
-            context.absController.AbsMovement.Rotate(rotateDirection);
-
             var controllerAttack = context.absController.AbsDamageSender.CheckCollision();
             if(controllerAttack != null && controllerAttack.Count != 0)
             {
