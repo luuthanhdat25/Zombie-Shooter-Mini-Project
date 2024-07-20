@@ -19,7 +19,7 @@ MonoBehaviour:
   GunType: 1
   ShootType: 1
   FireRate: 1
-  Damage: 10
+  Damage: 5
   ReloadDuration: 4
   AimDuration: 1.5
   NumberBulletShootOneTime: 1

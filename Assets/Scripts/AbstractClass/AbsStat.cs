@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace AbstractClass
 {
+    /// <summary>
+    /// Abstract base class for managing entity stats.
+    /// Provides core functionalities like health management, damage, and death handling.
+    /// </summary>
     public abstract class AbsStat : RepeatMonoBehaviour
     {
         public Action OnDead;

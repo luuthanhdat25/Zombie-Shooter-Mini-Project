@@ -26,6 +26,11 @@ namespace Movement{
             float targetRotation = Mathf.Atan2(rotateDirection.x, rotateDirection.z) * Mathf.Rad2Deg;
             transform.parent.rotation = Quaternion.Euler(0.0f, targetRotation, 0.0f);
         }
+
+        public override void ResetMovement()
+        {
+            agent.velocity = Vector3.zero;
+        }
     }
 }
 

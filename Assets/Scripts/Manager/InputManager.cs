@@ -28,6 +28,7 @@ namespace Manager
         {
             inputSystemSetting.Player.SwitchGun.performed += (InputAction.CallbackContext context) => OnSwitchGun?.Invoke();
             inputSystemSetting.Player.ReloadGun.performed += (InputAction.CallbackContext context) => OnReloadGun?.Invoke();
+            inputSystemSetting.Player.Escape.performed += (InputAction.CallbackContext context) => GameManager.Instance.TogglePauseGame();
         }
 
         public Vector2 GetRawInputNormalized()

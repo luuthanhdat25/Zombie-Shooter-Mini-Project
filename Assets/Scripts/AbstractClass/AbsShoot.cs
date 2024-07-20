@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace AbstractClass
 {
+    /// <summary>
+    /// Abstract base class for shooting components. Provides methods for handling shooting mechanics.
+    /// </summary>
     public abstract class AbsShoot : RepeatMonoBehaviour
     {
         protected float firingTimer;

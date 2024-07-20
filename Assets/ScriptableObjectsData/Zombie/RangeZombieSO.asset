@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ad25bdc4d563041bdffdf3ffc2465c, type: 3}
   m_Name: RangeZombieSO
   m_EditorClassIdentifier: 
-  Health: 2
+  Health: 5
   Damage: 5
-  MoveSpeed: 4
+  MoveSpeed: 3.5

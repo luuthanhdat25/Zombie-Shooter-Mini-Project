@@ -20,7 +20,7 @@ namespace Projectile
         {
             if (other == null) return;
             AbsController controller = other.GetComponent<AbsController>();
-            Destroy(gameObject);
+            ProjectilePooling.Instance.Despawn(transform);
             if (controller == null) return;
             CollisionWithController(controller);
         }

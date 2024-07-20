@@ -129,7 +129,10 @@ namespace Gun
 
         public bool Reload()
         {
-            if (CurrentGunController().IsFullCurrentBullet() || infiniteBullet || isReloading) return false;
+            if (infiniteBullet 
+                || isReloading 
+                || CurrentGunController().IsFullCurrentBullet() 
+                || CurrentGunController().IsOutOfBullet()) return false;
             isReloading = true;
             reloadTimer = 0;
             OnUpdatedReloadTimer?.Invoke(this, new OnReloadEventArgs

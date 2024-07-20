@@ -1110,10 +1110,10 @@ GameObject:
   - component: {fileID: 1997357240949643998}
   - component: {fileID: 7432605882629286190}
   - component: {fileID: 8517894453487229586}
-  - component: {fileID: 7408584417748959275}
-  - component: {fileID: 6276426775484578910}
   - component: {fileID: 1842805455331136589}
   - component: {fileID: 5688803607876998641}
+  - component: {fileID: 7052674366930517009}
+  - component: {fileID: 8855995877602385382}
   m_Layer: 7
   m_Name: MeleeZombie_Prefab
   m_TagString: Untagged
@@ -1212,8 +1212,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1231,7 +1231,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 5000
-  m_StoppingDistance: 1.5
+  m_StoppingDistance: 1.6
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1239,39 +1239,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7408584417748959275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4954670965896334616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58c6f9b140a52a14881ec09eaebb66eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: ca55e4b2f8c6a764a83d3cd053aba916, type: 2}
---- !u!114 &6276426775484578910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4954670965896334616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5105069f23ca9e74986489a1f38c99a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  absGraphic: {fileID: 6507145743883226626}
-  absAnimator: {fileID: 0}
-  absMovement: {fileID: 6971331413717964749}
-  absVisionSensor: {fileID: 3424479230129304556}
-  absHearingSensor: {fileID: 8525025348628471366}
-  absStat: {fileID: 5136294368948379947}
-  absDamageReciver: {fileID: 5688803607876998641}
-  absDamageSender: {fileID: 1842805455331136589}
 --- !u!114 &1842805455331136589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1284,9 +1251,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b28ddcd9d4392754ab93149645bd1eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 6276426775484578910}
-  attackDistance: 1.5
-  attackRadius: 1
+  controller: {fileID: 8855995877602385382}
+  attackDistance: 1.4
+  attackRadius: 0.8
   capsuleHeight: 2
 --- !u!114 &5688803607876998641
 MonoBehaviour:
@@ -1300,7 +1267,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 324416e598242aa499815ed0ecf851ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  absController: {fileID: 6276426775484578910}
+  absController: {fileID: 0}
+--- !u!114 &7052674366930517009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4954670965896334616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1442ffb24d3500e46bc42a3029e6e677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keySOList: []
+  isCollectKey: 0
+--- !u!114 &8855995877602385382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4954670965896334616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0374f3ed4533c2f489a6cc5c5405cd20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  absGraphic: {fileID: 6507145743883226626}
+  absAnimator: {fileID: 6577860929201784768}
+  absMovement: {fileID: 6971331413717964749}
+  absVisionSensor: {fileID: 3424479230129304556}
+  absHearingSensor: {fileID: 8525025348628471366}
+  absStat: {fileID: 5136294368948379947}
+  absDamageReciver: {fileID: 5688803607876998641}
+  absDamageSender: {fileID: 1842805455331136589}
+  keyCollector: {fileID: 7052674366930517009}
+  agent: {fileID: 8517894453487229586}
+  delayTargetPlayer: 0.5
+  delayAnimationToAttack: 0.7
 --- !u!1 &5254726650380903624
 GameObject:
   m_ObjectHideFlags: 0
