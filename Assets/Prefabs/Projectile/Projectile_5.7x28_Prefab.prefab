@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 6027704544757906619}
   - component: {fileID: 4913159556901915542}
   - component: {fileID: 6121124234016971830}
+  - component: {fileID: 6172979431946469408}
   m_Layer: 0
   m_Name: Projectile_5.7x28_Prefab
   m_TagString: Untagged
@@ -566,5 +567,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2069f046134afb444bed4fe3c0f854e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
+  controller: {fileID: 6027704544757906619}
   boxCollider: {fileID: 8832424271824836176}
+--- !u!114 &6172979431946469408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517766854666655396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9d4b3d9f4759a4a86236eb9a8e9433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeDespawn: 10

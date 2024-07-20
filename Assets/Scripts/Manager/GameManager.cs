@@ -34,6 +34,8 @@ namespace Manager
 
         public void TogglePauseGame()
         {
+            if (state == GameState.GameOver) return;
+
             if (state != GameState.GamePaused) {
                 ChangeState(GameState.GamePaused);
                 Time.timeScale = 0;

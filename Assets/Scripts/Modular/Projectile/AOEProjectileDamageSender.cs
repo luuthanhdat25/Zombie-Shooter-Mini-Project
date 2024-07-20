@@ -38,7 +38,7 @@ namespace Projectile
                 }
             }
 
-            Destroy(gameObject);
+            ProjectilePooling.Instance.Despawn(transform);
         }
     }
 }

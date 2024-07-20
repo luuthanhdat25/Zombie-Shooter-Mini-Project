@@ -1,4 +1,5 @@
 using AbstractClass;
+using Projectile;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -32,7 +33,7 @@ namespace Gun
 
         private void SpawnProjetile(Vector3 initalDirection, Vector3 initalPosition)
         {
-            GameObject newProjectile = Instantiate(currentGunSO.ProjectileSO.Prefab, initalPosition, Quaternion.identity);
+            Transform newProjectile = ProjectilePooling.Instance.GetProjetile(currentGunSO.ProjectileSO, initalPosition, Quaternion.identity); ;
             AbsController projectileController = newProjectile.GetComponent<AbsController>();
             if(projectileController == null)
             {

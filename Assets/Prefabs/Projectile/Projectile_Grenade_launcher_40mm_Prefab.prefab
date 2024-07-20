@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 6513753038293829154}
   - component: {fileID: 6483679421382817886}
   - component: {fileID: 4531219955280609443}
+  - component: {fileID: 3080853635473147298}
   m_Layer: 0
   m_Name: Projectile_Grenade_launcher_40mm_Prefab
   m_TagString: Untagged
@@ -470,6 +471,19 @@ MonoBehaviour:
     type: 3}
   radiusExplosion: 4
   boxCollider: {fileID: 7045294986296393226}
+--- !u!114 &3080853635473147298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3813438675327580145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9d4b3d9f4759a4a86236eb9a8e9433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeDespawn: 10
 --- !u!1 &3830725617399334881
 GameObject:
   m_ObjectHideFlags: 0

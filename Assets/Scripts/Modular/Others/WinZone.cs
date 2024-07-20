@@ -4,24 +4,28 @@ using ScriptableObjects;
 using UI;
 using UnityEngine;
 
-public class WinZone : MonoBehaviour
+namespace Other
 {
-    [SerializeField]
-    private KeySO winKeySO;
-
-    private void OnTriggerEnter(Collider other)
+    public class WinZone : MonoBehaviour
     {
-        if (other == null) return;
-        if (other.GetComponent<PlayerPublicInfor>() == null) return;
+        [SerializeField]
+        private KeySO winKeySO;
 
-        if (!PlayerPublicInfor.Instance.KeyCollector.IsHasKey(winKeySO))
+        private void OnTriggerEnter(Collider other)
         {
-            MessageUI.Instance.ShowMessage("Player doesn't has " + winKeySO.Name, Color.red);
-        }
-        else
-        {
-            PlayerPublicInfor.Instance.KeyCollector.RemoveKey(winKeySO);
-            GameManager.Instance.GameOver(true);
+            if (other == null) return;
+            if (other.GetComponent<PlayerPublicInfor>() == null) return;
+
+            if (!PlayerPublicInfor.Instance.KeyCollector.IsHasKey(winKeySO))
+            {
+                MessageUI.Instance.ShowMessage("Player doesn't has " + winKeySO.Name, Color.red);
+            }
+            else
+            {
+                PlayerPublicInfor.Instance.KeyCollector.RemoveKey(winKeySO);
+                GameManager.Instance.GameOver(true);
+            }
         }
     }
 }
+
