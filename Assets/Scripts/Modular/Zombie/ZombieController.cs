@@ -1,31 +1,56 @@
 using AbstractClass;
 using Key;
-using TheKiwiCoder;
+using NPBehave;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Zombie
 {
     public class ZombieController : AbsController
     {
         [SerializeField]
-        private BehaviourTreeRunner behaviourTreeRunner;
+        protected KeyCollector keyCollector;
 
         [SerializeField]
-        private KeyCollector keyCollector;
+        protected NavMeshAgent agent;
+
+        protected Root behaviorTree;
 
         public KeyCollector KeyCollector => keyCollector;
 
         protected override void LoadComponents()
         {
             base.LoadComponents();
-            LoadComponent(ref behaviourTreeRunner, gameObject);
-            ActiveBehaviourTree(false);
             LoadComponent(ref keyCollector, gameObject);
+            LoadComponent(ref agent, gameObject);
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             absStat.OnDead += SpawnKey;
+            behaviorTree = CreateBehaviourTree();
+#if UNITY_EDITOR
+            if(behaviorTree != null )
+            {
+                Debugger debugger = (Debugger)this.gameObject.AddComponent(typeof(Debugger));
+                debugger.BehaviorTree = behaviorTree;
+            }
+#endif
+        }
+
+        protected virtual Root CreateBehaviourTree() => null;
+
+        protected virtual void OnDestroy()
+        {
+            StopBehaviorTree();
+        }
+
+        protected virtual void StopBehaviorTree()
+        {
+            if (behaviorTree != null && behaviorTree.CurrentState == Node.State.ACTIVE)
+            {
+                behaviorTree.Stop();
+            }
         }
 
         private void SpawnKey()
@@ -37,6 +62,6 @@ namespace Zombie
             }
         }
 
-        public void ActiveBehaviourTree(bool isOn) => behaviourTreeRunner.enabled = isOn;
+        public virtual void ActiveBehaviourTree() => behaviorTree.Start();
     }
 }

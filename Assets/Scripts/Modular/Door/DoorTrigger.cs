@@ -61,7 +61,7 @@ namespace Door{
                 {
                     foreach (var zombie in zombiesInZone)
                     {
-                        zombie.ActiveBehaviourTree(true);
+                        zombie.ActiveBehaviourTree();
                     }
                 }
             }

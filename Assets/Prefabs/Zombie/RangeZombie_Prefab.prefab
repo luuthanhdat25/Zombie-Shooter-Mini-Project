@@ -1041,13 +1041,12 @@ GameObject:
   - component: {fileID: 2943798453275002199}
   - component: {fileID: 2990733886693240802}
   - component: {fileID: 3277317063803998660}
-  - component: {fileID: 5528336838971101850}
   - component: {fileID: 8821666560981280583}
   - component: {fileID: 8521726978115407129}
-  - component: {fileID: 5136671662328977688}
   - component: {fileID: 922203855002079552}
   - component: {fileID: 8405989897323314648}
   - component: {fileID: 105505579455803356}
+  - component: {fileID: 1305873429665581913}
   m_Layer: 7
   m_Name: RangeZombie_Prefab
   m_TagString: Untagged
@@ -1174,28 +1173,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5528336838971101850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2977703326643975542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5105069f23ca9e74986489a1f38c99a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  absGraphic: {fileID: 1106133662879918384}
-  absAnimator: {fileID: 6763096469434780388}
-  absMovement: {fileID: 5308780354858924009}
-  absVisionSensor: {fileID: 2924080960660689286}
-  absHearingSensor: {fileID: 7802583626885405602}
-  absStat: {fileID: 8299864317664869241}
-  absDamageReciver: {fileID: 8821666560981280583}
-  absDamageSender: {fileID: 8521726978115407129}
-  behaviourTreeRunner: {fileID: 5136671662328977688}
-  keyCollector: {fileID: 105505579455803356}
 --- !u!114 &8821666560981280583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1208,7 +1185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 324416e598242aa499815ed0ecf851ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  absController: {fileID: 5528336838971101850}
+  absController: {fileID: 0}
 --- !u!114 &8521726978115407129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1221,20 +1198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f0c1085258fe3243b4da2e5143ffec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 5528336838971101850}
---- !u!114 &5136671662328977688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2977703326643975542}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58c6f9b140a52a14881ec09eaebb66eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: ab0c0cda91c27ae4988ee6b013bd3136, type: 2}
+  controller: {fileID: 0}
 --- !u!114 &922203855002079552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1266,7 +1230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb702f858ca26b43971d72bfcf6ee9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  absController: {fileID: 5528336838971101850}
+  absController: {fileID: 0}
 --- !u!114 &105505579455803356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1281,6 +1245,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keySOList: []
   isCollectKey: 0
+--- !u!114 &1305873429665581913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977703326643975542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e09ca19066c834fa1c398560e001f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  absGraphic: {fileID: 1106133662879918384}
+  absAnimator: {fileID: 6763096469434780388}
+  absMovement: {fileID: 5308780354858924009}
+  absVisionSensor: {fileID: 2924080960660689286}
+  absHearingSensor: {fileID: 7802583626885405602}
+  absStat: {fileID: 8299864317664869241}
+  absDamageReciver: {fileID: 8821666560981280583}
+  absDamageSender: {fileID: 8521726978115407129}
+  keyCollector: {fileID: 105505579455803356}
+  agent: {fileID: 3277317063803998660}
+  wallLayerMark: Wall
+  distanceAvoidPlayer: 8
+  gunSelector: {fileID: 922203855002079552}
 --- !u!1 &3565096690434459130
 GameObject:
   m_ObjectHideFlags: 0
