@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UI
 {
-    public class MessageUI : Singleton<MessageUI>
+    public class MessageUI : MonoBehaviour
     {
         [SerializeField]
         private TMP_Text messageText;

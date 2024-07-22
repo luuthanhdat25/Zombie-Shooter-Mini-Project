@@ -18,7 +18,7 @@ namespace Other
 
             if (!PlayerPublicInfor.Instance.KeyCollector.IsHasKey(winKeySO))
             {
-                MessageUI.Instance.ShowMessage("Player doesn't has " + winKeySO.Name, Color.red);
+                UIManager.Instance.InPlayingUI.MessageUI.ShowMessage("Player doesn't has " + winKeySO.Name, Color.red);
             }
             else
             {

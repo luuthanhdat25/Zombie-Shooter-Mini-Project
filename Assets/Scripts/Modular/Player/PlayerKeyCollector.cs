@@ -24,7 +24,7 @@ namespace Player
 
             SoundPooling.Instance.CreateSound(pickupKeySoundSO, PlayerPublicInfor.Instance.Position, 0, 0);
             UIManager.Instance.InPlayingUI.KeyCollectedUI.UpdateVisual(keySOList);
-            MessageUI.Instance.ShowMessage("Player get " + keySO.Name, Color.green);
+            UIManager.Instance.InPlayingUI.MessageUI.ShowMessage("Player get " + keySO.Name, Color.green);
         }
 
         public override void RemoveKey(KeySO keySO)

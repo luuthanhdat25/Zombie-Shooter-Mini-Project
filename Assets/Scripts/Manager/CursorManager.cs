@@ -8,17 +8,32 @@ namespace Manager
 {
     public class CursorManager : Singleton<CursorManager>
     {
+        [System.Serializable]
+        public class CursorAnimation
+        {
+            public ShootType ShootType;
+            public Vector2 Offset;
+            public Texture2D[] TextureArray;
+        }
+
         [SerializeField]
         private List<CursorAnimation> cursorAnimationList;
 
         [SerializeField]
         private GunSelector playerGunSelector;
 
+        [SerializeField]
+        private Transform splotlightArea;
+
+        [SerializeField]
+        private LayerMask groundLayerMark;
+
         private int currentFrame;
         private int frameCount;
         private CursorAnimation currentCursorAnimation;
         private float aimTimer;
-
+        private RaycastHit hitInfo;
+        
         protected override void Awake()
         {
             base.Awake();
@@ -36,7 +51,16 @@ namespace Manager
             else
             {
                 SetActiveCursor(cursorAnimationList[indexCursor]);
+                splotlightArea.gameObject.SetActive(cursorAnimationList[indexCursor].ShootType == ShootType.AimRelease);
             }
+        }
+
+        public void SetActiveCursor(CursorAnimation cursorAnimation)
+        {
+            currentCursorAnimation = cursorAnimation;
+            currentFrame = 0;
+            frameCount = cursorAnimation.TextureArray.Length;
+            Cursor.SetCursor(cursorAnimation.TextureArray[0], cursorAnimation.Offset, CursorMode.Auto);
         }
 
         private int FindIndexCursorByShootType(ShootType shootType)
@@ -55,37 +79,37 @@ namespace Manager
 
             if(currentCursorAnimation.ShootType == ShootType.AimRelease)
             {
-                if (!playerGunSelector.IsUnUsingGun)
-                {
-                    aimTimer += Time.deltaTime;
-                }
-                else
-                {
-                    aimTimer = 0;
-                }
-                float processNormalize = Mathf.Clamp01(aimTimer / playerGunSelector.CurrentGunSO().AimDuration);
-                currentFrame = Mathf.FloorToInt(processNormalize * (frameCount - 1));
-                if (currentFrame >= 0 && currentFrame < currentCursorAnimation.TextureArray.Length)
-                {
-                    Cursor.SetCursor(currentCursorAnimation.TextureArray[currentFrame], currentCursorAnimation.Offset, CursorMode.Auto);
-                }
+                UpdateSpotlightPosition();
+
+                UpdateAimAnimation();
             }
         }
 
-        public void SetActiveCursor(CursorAnimation cursorAnimation)
+        private void UpdateSpotlightPosition()
         {
-            currentCursorAnimation = cursorAnimation;
-            currentFrame = 0;
-            frameCount = cursorAnimation.TextureArray.Length;
-            Cursor.SetCursor(cursorAnimation.TextureArray[0], cursorAnimation.Offset, CursorMode.Auto);
+            Ray ray = CameraManager.Instance.GetRayFromMousePosition();
+            if (Physics.Raycast(ray, out hitInfo, 100, groundLayerMark))
+            {
+                Vector3 newPosition = new Vector3(hitInfo.point.x, splotlightArea.position.y, hitInfo.point.z);
+                splotlightArea.position = newPosition;
+            }
+            else
+            {
+                splotlightArea.gameObject.SetActive(false);
+            }
         }
 
-        [System.Serializable]
-        public class CursorAnimation
+        private void UpdateAimAnimation()
         {
-            public ShootType ShootType;
-            public Vector2 Offset;
-            public Texture2D[] TextureArray;
+            aimTimer = playerGunSelector.IsUnUsingGun ? 0 : aimTimer + Time.deltaTime;
+
+            float processNormalize = Mathf.Clamp01(aimTimer / playerGunSelector.CurrentGunSO().AimDuration);
+            currentFrame = Mathf.FloorToInt(processNormalize * (frameCount - 1));
+            if (currentFrame >= 0 && currentFrame < currentCursorAnimation.TextureArray.Length)
+            {
+                Cursor.SetCursor(currentCursorAnimation.TextureArray[currentFrame], currentCursorAnimation.Offset, CursorMode.Auto);
+            }
         }
+
     }
 }

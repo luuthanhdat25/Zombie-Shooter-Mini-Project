@@ -117,7 +117,7 @@ namespace Gun
             isReloading = false;
             reloadTimer = 0;
 
-            if (!CurrentGunController().IsOutOfBullet() && CurrentGunController().CurrentBullet == 0)
+            if (!CurrentGunController().IsOutOfAllBullet() && CurrentGunController().CurrentBullet == 0)
             {
                 Reload();
             }
@@ -132,7 +132,8 @@ namespace Gun
             if (infiniteBullet 
                 || isReloading 
                 || CurrentGunController().IsFullCurrentBullet() 
-                || CurrentGunController().IsOutOfBullet()) return false;
+                || CurrentGunController().IsOutOfAllBullet()
+                || CurrentGunController().IsOutOfTotalBullet()) return false;
             isReloading = true;
             reloadTimer = 0;
             OnUpdatedReloadTimer?.Invoke(this, new OnReloadEventArgs
@@ -172,7 +173,7 @@ namespace Gun
             if (isReloading) return;
 
             isUnUsingGun = false;
-            if (CurrentGunController().IsOutOfBullet() && !infiniteBullet) return;
+            if (CurrentGunController().IsOutOfAllBullet() && !infiniteBullet) return;
             int numberOfBullets = GetNumberBulletShoot();
             if (numberOfBullets != 0)
             {
@@ -182,7 +183,7 @@ namespace Gun
                     {
                         CurrentGunController().DeductCurrentBullet(numberOfBullets);
                     }
-                    if (!CurrentGunController().IsOutOfBullet() && CurrentGunController().CurrentBullet == 0)
+                    if (!CurrentGunController().IsOutOfAllBullet() && CurrentGunController().CurrentBullet == 0)
                     {
                         Reload();
                     }
@@ -210,7 +211,7 @@ namespace Gun
             if (isUnUsingGun) return;
 
             isUnUsingGun = true;
-            if (CurrentGunController().IsOutOfBullet() && !infiniteBullet) return;
+            if (CurrentGunController().IsOutOfAllBullet() && !infiniteBullet) return;
 
             int numberOfBullets = GetNumberBulletShoot();
             if (numberOfBullets != 0)
@@ -221,7 +222,7 @@ namespace Gun
                     {
                         CurrentGunController().DeductCurrentBullet(numberOfBullets);
                     }
-                    if (!CurrentGunController().IsOutOfBullet() && CurrentGunController().CurrentBullet == 0)
+                    if (!CurrentGunController().IsOutOfAllBullet() && CurrentGunController().CurrentBullet == 0)
                     {
                         Reload();
                     }

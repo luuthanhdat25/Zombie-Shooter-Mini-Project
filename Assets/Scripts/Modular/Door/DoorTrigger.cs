@@ -55,13 +55,13 @@ namespace Door{
             
             if (!PlayerPublicInfor.Instance.KeyCollector.IsHasKey(keySOAccept))
             {
-                MessageUI.Instance.ShowMessage("Player doesn't has " + keySOAccept.Name, Color.red);
+                UIManager.Instance.InPlayingUI.MessageUI.ShowMessage("Player doesn't has " + keySOAccept.Name, Color.red);
                 SoundPooling.Instance.CreateSound(doorRejectSoundSO, PlayerPublicInfor.Instance.Position, 0, 0);
             }
             else
             {
                 SoundPooling.Instance.CreateSound(doorAcceptSoundSO, PlayerPublicInfor.Instance.Position, 0, 0);
-                MessageUI.Instance.ShowMessage("Open door", Color.green);
+                UIManager.Instance.InPlayingUI.MessageUI.ShowMessage("Open door", Color.green);
 
                 PlayerPublicInfor.Instance.KeyCollector.RemoveKey(keySOAccept);
                 doorTriggerBox.enabled = false;

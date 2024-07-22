@@ -58,7 +58,9 @@ namespace Gun
 
         public bool IsFullCurrentBullet() => currentBullet == gunSO.NumberBulletReload;
 
-        public bool IsOutOfBullet() => currentBullet <= 0 && totalBullet <= 0;
+        public bool IsOutOfAllBullet() => currentBullet <= 0 && totalBullet <= 0;
+
+        public bool IsOutOfTotalBullet() => totalBullet <= 0;
     
         public Vector3 ShootingPoition() => shootingPoint.position;
     }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class PlayerGunStatusUI : MonoBehaviour
+    public class GunStatusUI : MonoBehaviour
     {
         [SerializeField]
         private Image image;

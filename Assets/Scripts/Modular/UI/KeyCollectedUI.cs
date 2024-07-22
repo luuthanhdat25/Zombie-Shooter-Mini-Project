@@ -1,32 +1,34 @@
 using ScriptableObjects;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class KeyCollectedUI : MonoBehaviour
+namespace UI
 {
-    [SerializeField]
-    private Image tempalteIcon;
-
-    private void Start()
+    public class KeyCollectedUI : MonoBehaviour
     {
-        tempalteIcon.gameObject.SetActive(false);
-    }
+        [SerializeField]
+        private Image tempalteIcon;
 
-    public void UpdateVisual(List<KeySO> keySOList)
-    {
-        foreach (Transform childTransform in this.transform)
+        private void Start()
         {
-            if (childTransform != tempalteIcon.transform)
-                Destroy(childTransform.gameObject);
+            tempalteIcon.gameObject.SetActive(false);
         }
 
-        foreach (KeySO keySO in keySOList)
+        public void UpdateVisual(List<KeySO> keySOList)
         {
-            Transform iconTransfom = Instantiate(tempalteIcon.transform, this.transform);
-            iconTransfom.gameObject.SetActive(true);
-            iconTransfom.GetComponent<Image>().sprite = keySO.KeyIconSprite;
+            foreach (Transform childTransform in this.transform)
+            {
+                if (childTransform != tempalteIcon.transform)
+                    Destroy(childTransform.gameObject);
+            }
+
+            foreach (KeySO keySO in keySOList)
+            {
+                Transform iconTransfom = Instantiate(tempalteIcon.transform, this.transform);
+                iconTransfom.gameObject.SetActive(true);
+                iconTransfom.GetComponent<Image>().sprite = keySO.KeyIconSprite;
+            }
         }
     }
 }

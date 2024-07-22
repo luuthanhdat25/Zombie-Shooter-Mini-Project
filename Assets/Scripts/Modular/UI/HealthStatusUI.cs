@@ -3,8 +3,9 @@ using Player;
 using TMPro;
 using UnityEngine;
 
-namespace UI{
-    public class PlayerHealthStatusUI : MonoBehaviour
+namespace UI 
+{
+    public class HealthStatusUI : MonoBehaviour
     {
         [SerializeField]
         private TMP_Text healthText;

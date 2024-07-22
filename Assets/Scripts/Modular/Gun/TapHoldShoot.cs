@@ -12,7 +12,7 @@ namespace Gun
         public override void ResetShootValue(GunSO gunSO, int projectileLayerMarkIndex)
         {
             base.ResetShootValue(gunSO, projectileLayerMarkIndex);
-            firingTimer = 0;
+            firingTimer = FireRateToTimeDelayShoot(currentGunSO.FireRate);
         }
 
         public override bool ShootHold(Vector3 initalDirection, Vector3 initalPosition, int numberOfBullet, bool isDeltaTime)

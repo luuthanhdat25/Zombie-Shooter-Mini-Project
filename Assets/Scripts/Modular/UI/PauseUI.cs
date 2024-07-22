@@ -3,35 +3,38 @@ using UnityEngine.UI;
 using Manager;
 using LoadScene;
 
-public class PauseUI : MonoBehaviour
+namespace UI
 {
-    [SerializeField]
-    private RectTransform pauseMenu;
-    public RectTransform PauseMenu => pauseMenu;
-
-    [SerializeField]
-    private Button continuteButton;
-    public Button ContinuteButton => continuteButton;
-
-    [SerializeField]
-    private Button backToMenuButton;
-    public Button BackToMenuButton => backToMenuButton;
-
-
-    private void Start()
+    public class PauseUI : MonoBehaviour
     {
-        pauseMenu.gameObject.SetActive(false);
-        continuteButton.onClick.AddListener(TogglePauseGame);
-        backToMenuButton.onClick.AddListener(BackToMenuScene);
-    }
+        [SerializeField]
+        private RectTransform pauseMenu;
+        public RectTransform PauseMenu => pauseMenu;
 
-    private void TogglePauseGame()
-    {
-        GameManager.Instance.TogglePauseGame();
-    }
+        [SerializeField]
+        private Button continuteButton;
+        public Button ContinuteButton => continuteButton;
 
-    private void BackToMenuScene()
-    {
-        Loader.Load(Loader.Scene.GameMenuScene);
+        [SerializeField]
+        private Button backToMenuButton;
+        public Button BackToMenuButton => backToMenuButton;
+
+
+        private void Start()
+        {
+            pauseMenu.gameObject.SetActive(false);
+            continuteButton.onClick.AddListener(TogglePauseGame);
+            backToMenuButton.onClick.AddListener(BackToMenuScene);
+        }
+
+        private void TogglePauseGame()
+        {
+            GameManager.Instance.TogglePauseGame();
+        }
+
+        private void BackToMenuScene()
+        {
+            Loader.Load(Loader.Scene.GameMenuScene);
+        }
     }
 }
