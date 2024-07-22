@@ -25,7 +25,6 @@ namespace AbstractClass
         public virtual void CollisionWithController(AbsController absController)
         {
             if (absController == null) return;
-            Debug.Log("Deduct: " + controller.AbsStat.GetDamage());
             absController.AbsStat.Deduct(controller.AbsStat.GetDamage());
             absController.AbsDamageReciver.GotHit();
         }

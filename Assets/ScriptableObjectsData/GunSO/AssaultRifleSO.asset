@@ -16,6 +16,7 @@ MonoBehaviour:
   ImageSprite: {fileID: 21300000, guid: d6f33b23720d40b4fa587088941ec05c, type: 3}
   Prefab: {fileID: 1629517933342091003, guid: d23d1f9a0461fb94c83e308858667ab7, type: 3}
   ProjectileSO: {fileID: 11400000, guid: e2ac813ef560f2c48810120b94895d10, type: 2}
+  ShootSoundSO: {fileID: 11400000, guid: 80041c8f03153cf44b8672c69f5eb1e5, type: 2}
   GunType: 0
   ShootType: 0
   FireRate: 3

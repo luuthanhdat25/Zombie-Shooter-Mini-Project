@@ -40,7 +40,10 @@ namespace Movement
                 transform.parent.position = Vector3.Slerp(startRelative, endRelative, progress) + centerPivot;
 
                 Vector3 directionNormalize = (transform.parent.position - previousPosition).normalized;
-                transform.parent.rotation = Quaternion.LookRotation(directionNormalize);
+                if (directionNormalize != Vector3.zero) 
+                { 
+                    transform.parent.rotation = Quaternion.LookRotation(directionNormalize);
+                }
 
                 previousPosition = transform.parent.position;
                 yield return null;

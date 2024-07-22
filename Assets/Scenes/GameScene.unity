@@ -2008,9 +2008,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c7f1cc52daafa409f938e7a30dc22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorAcceptSoundSO: {fileID: 11400000, guid: f54918a39e556734baba8b228e145d45, type: 2}
+  doorRejectSoundSO: {fileID: 11400000, guid: 412d86cbffb0b644da52d6a525aafc6f, type: 2}
   doorTransform: {fileID: 1440798267}
   doorTriggerBox: {fileID: 363900426}
-  moveSpeed: 4
   zombiesInZone:
   - {fileID: 1474689577}
   - {fileID: 405975047}
@@ -4005,9 +4006,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c7f1cc52daafa409f938e7a30dc22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorAcceptSoundSO: {fileID: 11400000, guid: f54918a39e556734baba8b228e145d45, type: 2}
+  doorRejectSoundSO: {fileID: 11400000, guid: 412d86cbffb0b644da52d6a525aafc6f, type: 2}
   doorTransform: {fileID: 474951691}
   doorTriggerBox: {fileID: 601812393}
-  moveSpeed: 4
   zombiesInZone:
   - {fileID: 1587606532}
   - {fileID: 2055903361}
@@ -5029,6 +5031,54 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ef1f5c38a94f284d8872891abdaf32c, type: 3}
+--- !u!1 &788563712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 788563713}
+  - component: {fileID: 788563714}
+  m_Layer: 0
+  m_Name: SoundPooling
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &788563713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788563712}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1900104910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &788563714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788563712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c08d4a780077f524ebf281dc7a176f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEmitterPrefab: {fileID: 5682815727953540954, guid: d93a47bb076a54247b1d670e186d0d57,
+    type: 3}
+  maxPoolSize: 100
+  maxFrequentSoundEmitters: 30
 --- !u!1 &838809606
 GameObject:
   m_ObjectHideFlags: 0
@@ -7595,9 +7645,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c7f1cc52daafa409f938e7a30dc22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorAcceptSoundSO: {fileID: 11400000, guid: f54918a39e556734baba8b228e145d45, type: 2}
+  doorRejectSoundSO: {fileID: 11400000, guid: 412d86cbffb0b644da52d6a525aafc6f, type: 2}
   doorTransform: {fileID: 57311835}
   doorTriggerBox: {fileID: 1198571454}
-  moveSpeed: 4
   zombiesInZone:
   - {fileID: 958648103}
   - {fileID: 647216665}
@@ -10269,9 +10320,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c7f1cc52daafa409f938e7a30dc22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorAcceptSoundSO: {fileID: 11400000, guid: f54918a39e556734baba8b228e145d45, type: 2}
+  doorRejectSoundSO: {fileID: 11400000, guid: 412d86cbffb0b644da52d6a525aafc6f, type: 2}
   doorTransform: {fileID: 71244106}
   doorTriggerBox: {fileID: 1588395854}
-  moveSpeed: 4
   zombiesInZone:
   - {fileID: 1141678147}
   - {fileID: 1727171971}
@@ -10568,6 +10620,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48668ec2086975b4986190828b04def1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winGameSoundSO: {fileID: 11400000, guid: cd5374a42af609c47a8f4e992ff12ca7, type: 2}
+  loseGameSoundSO: {fileID: 11400000, guid: 7392d4f87a82d3a49b085b95f380adc7, type: 2}
+  gameMusicBackgroundSO: {fileID: 11400000, guid: c7ea78e77bfa2cd4886c105f60fd066d,
+    type: 2}
 --- !u!1 &1652932618
 GameObject:
   m_ObjectHideFlags: 0
@@ -12168,6 +12224,7 @@ Transform:
   - {fileID: 374271897}
   - {fileID: 493973236}
   - {fileID: 3893294199639930361}
+  - {fileID: 788563713}
   - {fileID: 46773017}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16273,6 +16330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   absController: {fileID: 6982812147933622150}
+  playerHurtSound: {fileID: 11400000, guid: 8054322adff18274a82d8f4663234304, type: 2}
 --- !u!114 &6982812147933622159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16326,6 +16384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keySOList: []
   isCollectKey: 1
+  pickupKeySoundSO: {fileID: 11400000, guid: a6719a7cc48581a4084342dc33891982, type: 2}
 --- !u!54 &6982812147933622163
 Rigidbody:
   m_ObjectHideFlags: 0

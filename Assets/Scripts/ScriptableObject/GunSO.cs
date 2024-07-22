@@ -10,6 +10,7 @@ namespace ScriptableObjects
         public Sprite ImageSprite;
         public GameObject Prefab;
         public ProjectileSO ProjectileSO;
+        public SoundSO ShootSoundSO;
         public GunType GunType;
         public ShootType ShootType;
 
