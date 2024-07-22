@@ -1,6 +1,8 @@
 using AbstractClass;
+using Player;
 using Projectile;
 using ScriptableObjects;
+using Sound;
 using UnityEngine;
 
 namespace Gun
@@ -49,12 +51,7 @@ namespace Gun
             projectileController.SetLayerMark(currentProjectileLayerMark);
             projectileController.AbsStat.SetDamage(currentGunSO.Damage);
             projectileController.AbsMovement.Move(releasePosition, currentGunSO.ProjectileSO.SpeedMove);
-        }
-
-        public float AimProcessNormalize()
-        {
-            if (currentGunSO.AimDuration == 0) Debug.LogError($"{currentGunSO.Name} aim duration is 0!");
-            return Mathf.Clamp01(aimTimer / currentGunSO.AimDuration);
+            SoundPooling.Instance.CreateSound(currentGunSO.ShootSoundSO, PlayerPublicInfor.Instance.Position, 0, 0);
         }
     }
 }

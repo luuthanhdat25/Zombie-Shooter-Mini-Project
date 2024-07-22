@@ -1,6 +1,7 @@
 using Player;
 using RepeatUtil.DesignPattern.SingletonPattern;
 using ScriptableObjects;
+using Sound;
 using System;
 using UI;
 using UnityEngine;
@@ -45,7 +46,7 @@ namespace Manager
 
         private void Start()
         {
-            SoundManager.Instance.CreateSound().SetPosition(PlayerPublicInfor.Instance.Position).Play(gameMusicBackgroundSO);
+            SoundPooling.Instance.CreateSound(gameMusicBackgroundSO, PlayerPublicInfor.Instance.Position, 0, 0); 
         }
 
         public void TogglePauseGame()
@@ -87,8 +88,9 @@ namespace Manager
 
         public void GameOver(bool isWin)
         {
+            SoundPooling.Instance.StopAll();
             SoundSO playSound = isWin ? winGameSoundSO : loseGameSoundSO;
-            SoundManager.Instance.CreateSound().SetPosition(PlayerPublicInfor.Instance.Position).Play(playSound);
+            SoundPooling.Instance.CreateSound(playSound, PlayerPublicInfor.Instance.Position, 0, 0);
 
             UIManager.Instance.GameOverUI.Show(isWin);
             ChangeState(GameState.GameOver);

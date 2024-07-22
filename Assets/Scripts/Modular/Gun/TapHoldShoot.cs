@@ -1,6 +1,8 @@
 using AbstractClass;
+using Player;
 using Projectile;
 using ScriptableObjects;
+using Sound;
 using UnityEngine;
 
 namespace Gun
@@ -39,9 +41,11 @@ namespace Gun
             {
                 Debug.LogError(currentGunSO.Prefab.name + " doesn't have controller!");
             }
+
             projectileController.SetLayerMark(currentProjectileLayerMark);
             projectileController.AbsStat.SetDamage(currentGunSO.Damage);
             projectileController.AbsMovement.Move(initalDirection, currentGunSO.ProjectileSO.SpeedMove);
+            SoundPooling.Instance.CreateSound(currentGunSO.ShootSoundSO, PlayerPublicInfor.Instance.Position, -0.05f, 0.05f); ;
         }
     }
 }

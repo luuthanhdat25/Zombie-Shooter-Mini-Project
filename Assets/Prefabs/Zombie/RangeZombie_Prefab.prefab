@@ -1185,7 +1185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 324416e598242aa499815ed0ecf851ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  absController: {fileID: 0}
+  absController: {fileID: 1305873429665581913}
+  hurtSoundSO: {fileID: 11400000, guid: 217a84b52b95fc14f9c7903ccbde84fe, type: 2}
 --- !u!114 &8521726978115407129
 MonoBehaviour:
   m_ObjectHideFlags: 0

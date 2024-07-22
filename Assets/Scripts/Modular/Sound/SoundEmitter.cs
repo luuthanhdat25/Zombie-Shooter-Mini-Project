@@ -14,7 +14,9 @@ namespace Sound
         private AudioSource audioSource;
         
         private Coroutine playingCoroutine;
-        public LinkedListNode<SoundEmitter> SoundEmitterLinkedListNode { get; set; }
+        private SoundSO soundSO;
+
+        public SoundSO SoundSO => soundSO;
 
         protected override void Awake()
         {
@@ -22,13 +24,15 @@ namespace Sound
             LoadComponent(ref audioSource, gameObject);
         }
 
-        public void Initialize(SoundSO soundSO)
+        public SoundEmitter Initialize(SoundSO soundSO)
         {
+            this.soundSO = soundSO;
             audioSource.volume = soundSO.Volume;
             audioSource.clip = soundSO.AudioClip;
             audioSource.outputAudioMixerGroup = soundSO.AudioMixerGroup;
             audioSource.loop = soundSO.Loop;
             audioSource.playOnAwake = soundSO.PlayOnAwake;
+            return this;
         }
 
         public void Play()
@@ -57,7 +61,7 @@ namespace Sound
             }
 
             audioSource.Stop();
-            SoundManager.Instance.ReturnToPool(this);
+            SoundPooling.Instance.Despawn(this);
         }
 
         public void SetRandomPitch(float min = -0.05f, float max = 0.05f)

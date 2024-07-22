@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd9493612eee8bb468bd51dc97d86f79, type: 3}
-  m_Name: GrenadeLaucherGunShootSfxSO
+  m_Name: PickupKeySO
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
+  AudioClip: {fileID: 8300000, guid: c0b53f45581b73345930783646d0c11d, type: 3}
   AudioMixerGroup: {fileID: 0}
   Volume: 1
   Loop: 0
   PlayOnAwake: 1
-  FrequentSound: 1
+  FrequentSound: 0

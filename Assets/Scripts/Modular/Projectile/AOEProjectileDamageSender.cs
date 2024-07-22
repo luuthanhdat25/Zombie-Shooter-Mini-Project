@@ -1,5 +1,7 @@
 using AbstractClass;
 using Player;
+using ScriptableObjects;
+using Sound;
 using UnityEngine;
 
 namespace Projectile
@@ -7,6 +9,9 @@ namespace Projectile
     [RequireComponent(typeof(BoxCollider))]
     public class AOEProjectileDamageSender : AbsDamageSender
     {
+        [SerializeField]
+        private SoundSO exploseSoundSO;
+
         [SerializeField]
         private GameObject explosionEffect;
 
@@ -43,6 +48,7 @@ namespace Projectile
             }
 
             ProjectilePooling.Instance.Despawn(transform);
+            SoundPooling.Instance.CreateSound(exploseSoundSO, transform.position, 0, 0);
         }
     }
 }

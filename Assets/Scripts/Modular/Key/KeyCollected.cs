@@ -1,11 +1,9 @@
 using ScriptableObjects;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Key
 {
-    public class KeyController : MonoBehaviour
+    public class KeyCollected : MonoBehaviour
     {
         [SerializeField]
         private KeySO keySO;

@@ -1,20 +1,28 @@
+using Key;
+using Player;
 using ScriptableObjects;
+using Sound;
 using UI;
 using UnityEngine;
 
-namespace Key
+namespace Player
 {
-    public class PlayerControllerKeyCollector : KeyCollector
+    public class PlayerKeyCollector : KeyCollector
     {
+        [SerializeField]
+        private SoundSO pickupKeySoundSO;
+
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
             if (!isCollectKey) return;
             if (hit.collider == null) return;
 
-            KeyController keyController = hit.collider.GetComponent<KeyController>();
-            if (keyController == null) return;
-            KeySO keySO = keyController.CollectKey();
+            KeyCollected key = hit.collider.GetComponent<KeyCollected>();
+            if (key == null) return;
+            KeySO keySO = key.CollectKey();
             Add(keySO);
+
+            SoundPooling.Instance.CreateSound(pickupKeySoundSO, PlayerPublicInfor.Instance.Position, 0, 0);
             UIManager.Instance.InPlayingUI.KeyCollectedUI.UpdateVisual(keySOList);
             MessageUI.Instance.ShowMessage("Player get " + keySO.Name, Color.green);
         }

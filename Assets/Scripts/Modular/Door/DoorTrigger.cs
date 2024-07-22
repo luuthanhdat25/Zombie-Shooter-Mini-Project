@@ -1,5 +1,7 @@
+using Manager;
 using Player;
 using ScriptableObjects;
+using Sound;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,13 +13,16 @@ namespace Door{
     public class DoorTrigger : MonoBehaviour
     {
         [SerializeField]
+        private SoundSO doorAcceptSoundSO;
+
+        [SerializeField]
+        private SoundSO doorRejectSoundSO;
+
+        [SerializeField]
         private Transform doorTransform;
 
         [SerializeField]
         private BoxCollider doorTriggerBox;
-
-        [SerializeField]
-        private float moveSpeed = 1.0f;  
 
         [SerializeField]
         private List<ZombieController> zombiesInZone;
@@ -29,6 +34,7 @@ namespace Door{
         private KeySO keySONextDoor;
 
         private float doorMoveDistance = 3.0f;
+        private const float MOVE_SPEED = 4.0f;  
 
         private void Start()
         {
@@ -50,9 +56,13 @@ namespace Door{
             if (!PlayerPublicInfor.Instance.KeyCollector.IsHasKey(keySOAccept))
             {
                 MessageUI.Instance.ShowMessage("Player doesn't has " + keySOAccept.Name, Color.red);
+                SoundPooling.Instance.CreateSound(doorRejectSoundSO, PlayerPublicInfor.Instance.Position, 0, 0);
             }
             else
             {
+                SoundPooling.Instance.CreateSound(doorAcceptSoundSO, PlayerPublicInfor.Instance.Position, 0, 0);
+                MessageUI.Instance.ShowMessage("Open door", Color.green);
+
                 PlayerPublicInfor.Instance.KeyCollector.RemoveKey(keySOAccept);
                 doorTriggerBox.enabled = false;
                 StartCoroutine(DoorMoveDown());
@@ -74,7 +84,7 @@ namespace Door{
 
             while (Vector3.Distance(doorTransform.position, targetPosition) > 0.01f)
             {
-                doorTransform.position = Vector3.MoveTowards(doorTransform.position, targetPosition, moveSpeed * Time.deltaTime);
+                doorTransform.position = Vector3.MoveTowards(doorTransform.position, targetPosition, MOVE_SPEED * Time.deltaTime);
                 yield return null;
             }
 

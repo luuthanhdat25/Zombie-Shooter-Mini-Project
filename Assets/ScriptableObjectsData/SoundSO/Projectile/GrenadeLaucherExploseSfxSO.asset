@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd9493612eee8bb468bd51dc97d86f79, type: 3}
   m_Name: GrenadeLaucherExploseSfxSO
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 8300000, guid: 84af5e9b53bd76247b534152fb942f34, type: 3}
+  AudioClip: {fileID: 8300000, guid: 858662146f6d1d34fb6970dacc29f99f, type: 3}
   AudioMixerGroup: {fileID: 0}
   Volume: 1
   Loop: 0
   PlayOnAwake: 1
-  FrequentSound: 0
+  FrequentSound: 1

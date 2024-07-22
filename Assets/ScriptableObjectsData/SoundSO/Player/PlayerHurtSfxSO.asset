@@ -17,4 +17,4 @@ MonoBehaviour:
   Volume: 1
   Loop: 0
   PlayOnAwake: 1
-  FrequentSound: 0
+  FrequentSound: 1

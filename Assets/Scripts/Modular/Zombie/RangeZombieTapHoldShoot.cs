@@ -1,6 +1,8 @@
 using AbstractClass;
+using Player;
 using Projectile;
 using ScriptableObjects;
+using Sound;
 using UnityEngine;
 
 namespace Zombie
@@ -52,6 +54,7 @@ namespace Zombie
             projectileController.SetLayerMark(currentProjectileLayerMark);
             projectileController.AbsStat.SetDamage(absController.AbsStat.GetDamage());
             projectileController.AbsMovement.Move(initalDirection, currentGunSO.ProjectileSO.SpeedMove);
+            SoundPooling.Instance.CreateSound(currentGunSO.ShootSoundSO, PlayerPublicInfor.Instance.Position, -0.05f, 0.05f);
         }
     }
 }

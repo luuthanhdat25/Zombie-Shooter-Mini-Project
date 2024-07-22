@@ -2008,9 +2008,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c7f1cc52daafa409f938e7a30dc22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorAcceptSoundSO: {fileID: 11400000, guid: f54918a39e556734baba8b228e145d45, type: 2}
+  doorRejectSoundSO: {fileID: 11400000, guid: 412d86cbffb0b644da52d6a525aafc6f, type: 2}
   doorTransform: {fileID: 1440798267}
   doorTriggerBox: {fileID: 363900426}
-  moveSpeed: 4
   zombiesInZone:
   - {fileID: 1474689577}
   - {fileID: 405975047}
@@ -3520,7 +3521,6 @@ Transform:
   - {fileID: 1648497412}
   - {fileID: 284642638}
   - {fileID: 1058111752}
-  - {fileID: 788563713}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &512630937
@@ -4006,9 +4006,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c7f1cc52daafa409f938e7a30dc22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorAcceptSoundSO: {fileID: 11400000, guid: f54918a39e556734baba8b228e145d45, type: 2}
+  doorRejectSoundSO: {fileID: 11400000, guid: 412d86cbffb0b644da52d6a525aafc6f, type: 2}
   doorTransform: {fileID: 474951691}
   doorTriggerBox: {fileID: 601812393}
-  moveSpeed: 4
   zombiesInZone:
   - {fileID: 1587606532}
   - {fileID: 2055903361}
@@ -5041,7 +5042,7 @@ GameObject:
   - component: {fileID: 788563713}
   - component: {fileID: 788563714}
   m_Layer: 0
-  m_Name: SoundManager
+  m_Name: SoundPooling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5055,12 +5056,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788563712}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 504606794}
+  m_Father: {fileID: 1900104910}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &788563714
 MonoBehaviour:
@@ -5076,10 +5077,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEmitterPrefab: {fileID: 5682815727953540954, guid: d93a47bb076a54247b1d670e186d0d57,
     type: 3}
-  collectionCheck: 1
-  defaultCapacity: 10
   maxPoolSize: 100
-  maxSoundInstances: 30
+  maxFrequentSoundEmitters: 30
 --- !u!1 &838809606
 GameObject:
   m_ObjectHideFlags: 0
@@ -7646,9 +7645,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c7f1cc52daafa409f938e7a30dc22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorAcceptSoundSO: {fileID: 11400000, guid: f54918a39e556734baba8b228e145d45, type: 2}
+  doorRejectSoundSO: {fileID: 11400000, guid: 412d86cbffb0b644da52d6a525aafc6f, type: 2}
   doorTransform: {fileID: 57311835}
   doorTriggerBox: {fileID: 1198571454}
-  moveSpeed: 4
   zombiesInZone:
   - {fileID: 958648103}
   - {fileID: 647216665}
@@ -10320,9 +10320,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c7f1cc52daafa409f938e7a30dc22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorAcceptSoundSO: {fileID: 11400000, guid: f54918a39e556734baba8b228e145d45, type: 2}
+  doorRejectSoundSO: {fileID: 11400000, guid: 412d86cbffb0b644da52d6a525aafc6f, type: 2}
   doorTransform: {fileID: 71244106}
   doorTriggerBox: {fileID: 1588395854}
-  moveSpeed: 4
   zombiesInZone:
   - {fileID: 1141678147}
   - {fileID: 1727171971}
@@ -12223,6 +12224,7 @@ Transform:
   - {fileID: 374271897}
   - {fileID: 493973236}
   - {fileID: 3893294199639930361}
+  - {fileID: 788563713}
   - {fileID: 46773017}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16328,6 +16330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   absController: {fileID: 6982812147933622150}
+  playerHurtSound: {fileID: 11400000, guid: 8054322adff18274a82d8f4663234304, type: 2}
 --- !u!114 &6982812147933622159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16381,6 +16384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keySOList: []
   isCollectKey: 1
+  pickupKeySoundSO: {fileID: 11400000, guid: a6719a7cc48581a4084342dc33891982, type: 2}
 --- !u!54 &6982812147933622163
 Rigidbody:
   m_ObjectHideFlags: 0
