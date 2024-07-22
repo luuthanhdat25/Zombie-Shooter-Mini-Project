@@ -24,6 +24,11 @@ namespace Manager
             inputSystemSetting.Enable();
         }
 
+        private void OnDisable()
+        {
+            inputSystemSetting.Disable();
+        }
+
         private void Start()
         {
             inputSystemSetting.Player.SwitchGun.performed += (InputAction.CallbackContext context) => OnSwitchGun?.Invoke();
