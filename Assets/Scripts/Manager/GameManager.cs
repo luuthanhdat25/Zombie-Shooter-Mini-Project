@@ -1,4 +1,6 @@
+using Player;
 using RepeatUtil.DesignPattern.SingletonPattern;
+using ScriptableObjects;
 using System;
 using UI;
 using UnityEngine;
@@ -11,6 +13,15 @@ namespace Manager
         public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
         public event Action OnGamePaused;
         public event Action OnGameUnpaused;
+
+        [SerializeField]
+        private SoundSO winGameSoundSO;
+
+        [SerializeField]
+        private SoundSO loseGameSoundSO;
+
+        [SerializeField]
+        private SoundSO gameMusicBackgroundSO;
 
         public class OnStateChangedEventArgs : EventArgs {
             public GameState NewGameState;
@@ -30,6 +41,11 @@ namespace Manager
             base.Awake();
             state = GameState.GamePlaying;
             Time.timeScale = 1;
+        }
+
+        private void Start()
+        {
+            SoundManager.Instance.CreateSound().SetPosition(PlayerPublicInfor.Instance.Position).Play(gameMusicBackgroundSO);
         }
 
         public void TogglePauseGame()
@@ -71,6 +87,9 @@ namespace Manager
 
         public void GameOver(bool isWin)
         {
+            SoundSO playSound = isWin ? winGameSoundSO : loseGameSoundSO;
+            SoundManager.Instance.CreateSound().SetPosition(PlayerPublicInfor.Instance.Position).Play(playSound);
+
             UIManager.Instance.GameOverUI.Show(isWin);
             ChangeState(GameState.GameOver);
             Time.timeScale = 0;

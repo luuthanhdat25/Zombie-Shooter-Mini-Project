@@ -7,7 +7,7 @@ namespace Projectile
 {
     public class ProjectilePooling : Singleton<ProjectilePooling>
     {
-        public virtual Transform GetProjetile(ProjectileSO projectileSO, Vector3 position, Quaternion rotation)
+        public virtual Transform GetProjectile(ProjectileSO projectileSO, Vector3 position, Quaternion rotation)
         {
             Transform prefab = GetFromPool(projectileSO);
             prefab.SetParent(transform);

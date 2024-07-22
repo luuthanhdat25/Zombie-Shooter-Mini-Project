@@ -1,4 +1,5 @@
 using AbstractClass;
+using Player;
 using UnityEngine;
 
 namespace Projectile
@@ -34,7 +35,10 @@ namespace Projectile
             {
                 if (objCollider.TryGetComponent<AbsController>(out AbsController absController))
                 {
-                    CollisionWithController(absController);
+                    if(absController is not PlayerController)
+                    {
+                        CollisionWithController(absController);
+                    }
                 }
             }
 
