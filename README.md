@@ -23,6 +23,10 @@ Each room will contain a certain number of zombies, and when the door is opened,
 
 You can download it from the following link: [Zombie Shooter Demo on itch.io](https://luuthanhdat.itch.io/zombie-shooter-demo)
 
+## Using Package
+- [NavMesh Navigation](https://docs.unity3d.com/Packages/com.unity.ai.navigation@2.0/manual/CreateNavMesh.html) for Zombie movement
+- [NPBehave (Behaviour Tree package)](https://github.com/meniku/NPBehave) for Zombie Behaviour
+
 ## Credits
 
 - **Game Design & Development**: Luu Thanh Dat
